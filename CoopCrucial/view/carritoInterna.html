@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>.: COOPCRUCIAL :.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../css/fluid_grid.css" type="text/css" rel="stylesheet"/>
+        <link href="../css/sylesCroopCrucial.css" type="text/css" rel="stylesheet"/>
+        <style type="text/css">
+            .divDireccion{
+                width: 100%;
+                height: 100px;
+                float: left;
+                cursor: pointer;
+            }
+        </style>
+        <script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="../js/funciones.js"></script>
+        <!--Cufon-->
+        <script type="text/javascript" src="../js/cufon-juy.js"></script>
+        <script type="text/javascript" src="../js/Futura_LT_700.font.js"></script>
+        <script type="text/javascript">
+            Cufon.replace('.TitulosMenu');
+            Cufon.replace('#ContenedorOfertaHome #Porcentaje');
+            Cufon.replace('#ContenedorRecomendadosHome #Titulo');
+            Cufon.replace('.ContenedorLinksFooter .Titulos');
+            Cufon.replace('.CajaProductosOferta .Precio');
+            Cufon.replace('.CajaProductosOferta .PrecioOline');
+        </script>
+    </head>
+    <body>
+        <div class="container_12">
+            {#include file="header.tpl"#}
+            <div class="grid_12" align="center">
+                <h2>PROCESO DE COMPRA</h2>
+                <div style="width: 80%; height: 50px; border: 1px solid #000; margin-left: 10%; float: left;">
+                    <div align="center" style="width: 33%; float: left;">
+                        {#if $paso == 1#}
+                        <strong>Paso 1</strong>
+                        {#else#}
+                        Paso 1
+                        {#/if#}
+                    </div>
+                    <div align="center" style="width: 33%; float: left;">
+                        {#if $paso == 2#}
+                        <strong>Paso 2</strong>
+                        {#else#}
+                        Paso 2
+                        {#/if#}
+                    </div>
+                    <div align="center" style="width: 33%; float: left;">
+                        {#if $paso == 3#}
+                        <strong>Paso 3</strong>
+                        {#else#}
+                        Paso 3
+                        {#/if#}
+                    </div>
+                </div>
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            {#if $paso == 1#}
+            <div id="carrito1" class="grid_8">
+                <table style="width: 100%; border: 1px solid #000;">
+                    <th style="width: 50px;">#</th>
+                    <th>Producto en el carrito</th>
+                    <th>Descripci&oacute;n</th>
+                    <th>Precio</th>
+                    {#foreach from=$productos item="p"#}
+                    <tr>
+                        <td>
+                            <input type="text" name="cantidades[]" value="{#$p.cantidad#}" style="width: 50px;"/>
+                            <input type="hidden" name="idsVentas[]" value="{#$p.idVenta#}"/><br/>
+                            <a href="javascript:void(0);" onclick="eliminarRegistro({#$p.idProducto#});">Eliminar</a>
+                        </td>
+                        <td><img src="../91f5167c34c400758115c2a6826ec2e3/recursos/producto/{#$p.idProducto#}/{#$p.imagen#}" width="40" height="40"/>{#$p.nombre#}</td>
+                        <td>Descripcion</td>
+                        <td align="right">{#$p.precioWeb#}</td>
+                    </tr>
+                    {#/foreach#}
+                    <tr>
+                        <td colspan="2"></td>
+                        <td><strong>TOTAL</strong></td>
+                        <td align="right">{#$total#}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="grid_4"></div>
+            <div align="center" class="grid_8">
+                <input type="button" onclick="cargarCarrito(2);" value="CONFIRMAR EL PAGO"/>
+                <input type="button" onclick="imprimir('carrito1');" value="IMPRIMIR"/>
+            </div>
+            {#elseif $paso == 2#}
+            <h3 align="center">Selecciona como quieres obtener tu producto</h3>
+            <div align="center" class="grid_4">
+                <a href="javascript:void(0);" onclick="opciones(1);">
+                    <img src="../images/botonSede.PNG"/>
+                </a>
+            </div>
+            <div align="center" class="grid_4">
+                <a href="javascript:void(0);" onclick="opciones(2);">
+                    <img src="../images/botonPuerta.PNG"/>
+                </a>
+            </div>
+            <div align="center" class="grid_4"><img src="../images/botonTel.PNG"/></div>
+            <div id="divSede" class="grid_12" style="display: none; float: left;">
+                <div align="center" style="width: 30%; float: left;"><img src="../images/logoCrucial.PNG"/></div>
+                <div style="width: 65%; margin-left: 20px; float: left;">
+                    <label><strong>{#$smarty.session.usuario.nombre#},puedes recoger tus productos en la cooperativa.</strong></label>
+                    <p/>
+                    <label><strong>F&aacute;cil comprando por que estamos preparados:</strong></label><br/>
+                    <label>Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui sollicitudin sollicitudin. In conspectu solicitus facilitus nae. 8:00 am hasta las 5:00pm de Lunes a Viernes</label>
+                    <p/>
+                    <label><strong>Tel&eacute;fono</strong></label><br/>
+                    <label style="font-size: 30px;">(57) 8004545</label>
+                    <div style="width: 50%; float: left;">
+                        <label><strong>Direcci&oacute;n</strong></label><br/>
+                        <label>Cra 68 a No 23 - 63</label>
+                    </div>
+                    <div style="width: 50%; float: left;">
+                        <label><strong>Correo Electr&oacute;nico</strong></label><br/>
+                        <label><a href="emailto:ventas@coopcrucial.com">ventas@coopcrucial.com</a></label>
+                    </div>
+                </div>
+                <input type="button" onclick="imprimir('divSede');" value="IMPRIMIR"/>
+            </div>
+            <div id="divPuerta" class="grid_12" style="display: none; float: left;">
+                <div style="width: 30%; float: left;">
+                    {#foreach name="dir" from=$direcciones item="d"#}
+                    <div class="divDireccion" onclick="cargarDireccionDiv('{#$d.idDireccion#}');" style="{#if $smarty.foreach.dir.iteration == 1#} background: url('../images/barraDireccion.PNG') no-repeat; overflow: visible;{#else#} border: 1px solid #000;{#/if#}">
+                        <label><strong>Direcci&oacute;n Principal</strong></label><br/>
+                        <label><strong>Tel&eacute;fono:</strong> {#$d.telefono#}</label><br/>
+                        <label><strong>Direcci&oacute;n:</strong> {#$d.direccion#}</label><br/>
+                        <input type="radio" name="direccion" onclick="cargarDireccion('#$d.idDireccion#');"/>Direcci&oacute;n para esta entrega
+                    </div>
+                    {#/foreach#}
+                    <div style="width: 100%; height: 30px; border: 1px solid #000; cursor: pointer; float: left;" onclick="nuevaDireccion();">
+                        Ingresar nueva direcci&oacute;n
+                    </div>
+                </div>
+                <div style="width: 65%; margin-left: 20px; float: left;">
+                    <div id="divDireccionPredeterminada" style="width: 100%; float: left;">
+                        <div align="right" style="float: left; width:100%;">
+                            <a href="javascript:void(0);" onclick="editarDireccion('{#$direccion.idDireccion#}');">Editar Direccion</a>
+                            <a href="javascript:void(0);" onclick="eliminarDireccion('{#$direccion.idDireccion#}');">Eliminar Direccion</a>
+                        </div>
+                        <label><strong>{#$smarty.session.usuario.nombre#}, estos los productos serán entregados a:</strong></label><p/>
+                        <table>
+                            <tr>
+                                <td align="right"><strong>Pa&iacute;s:</strong></td>
+                                <td>{#$direccion.pais#}</td>
+                            </tr>
+                            <tr>
+                                <td align="right"><strong>Ciudad:</strong></td>
+                                <td>{#$direccion.ciudad#}</td>
+                            </tr>
+                            <tr>
+                                <td align="right"><strong>Direcci&oacute;n:</strong></td>
+                                <td>{#$direccion.direccion#}</td>
+                            </tr>
+                            <tr>
+                                <td align="right"><strong>Tel&eacute;fono:</strong></td>
+                                <td>{#$direccion.telefono#}</td>
+                            </tr>
+                            <tr>
+                                <td align="right"><strong>Celular:</strong></td>
+                                <td>{#$direccion.celular#}</td>
+                            </tr>
+                            <tr>
+                                <td align="right"><strong>Correo Electr&oacute;nico:</strong></td>
+                                <td>{#$direccion.correoElectronico#}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="divNuevaDireccion" style="width: 100%; display: none; float: left;">
+                        <label><strong>Ingresar la nueva direcci&oacute;n que quieres en el sistema</strong></label><p/>
+                        <form id="frm_direccion" action="" method="post">
+                            <table>
+                                <tr>
+                                    <td align="right"><strong>Tel&eacute;fono</strong></td>
+                                    <td>
+                                        <input type="text" id="telefono" name="telefono"/><br/>
+                                        <input type="radio" name="lugarTelefono" value="oficina"/>Oficina
+                                        <input type="radio" name="lugarTelefono" value="casa" checked/>Casa
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><strong>Pais</strong></td>
+                                    <td>
+                                        <select id="n_pais" name="pais" onclick="consultarCiudades();">
+                                            <option value="">Seleccione su pais de residencia</option>
+                                            {#html_options options=$paises#}
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><strong>Ciudad</strong></td>
+                                    <td>
+                                        <div id="divCiudad">
+                                            <select id="ciudad" name="ciudad">
+                                                <option value="">Seleccione la ciudad</option>
+                                                {#html_options options=$ciudades#}
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><strong>Direcci&oacute;n</strong></td>
+                                    <td>
+                                        <input type="text" id="direccion" name="direccion"/><br/>
+                                        <input type="radio" name="lugarDireccion" value="oficina"/>Oficina
+                                        <input type="radio" name="lugarDireccion" value="casa" checked/>Casa
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="right">
+                                        <strong>Hacer esta direcci&oacute;n la de entrega predeterminada</strong><br/>
+                                        <input type="radio" name="direccionPredeterminada" value="1"/>SI
+                                        <input type="radio" name="direccionPredeterminada" value="0" checked/>NO
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        <div align="center" style="width: 100%; float: left;">
+                            <input type="button" onclick="guardarDireccion();" value="GUARDAR NUEVA DIRECCION"/>
+                        </div>
+                    </div>
+                </div>
+                <div align="center" class="grid_12">
+                    <input type="hidden" id="idDireccion" value=""/>
+                    <input type="button" onclick="cargarCarrito(3);" value="REALIZAR EL PAGO AHORA"/>
+                </div>
+            </div>
+            {#elseif $paso == 3#}
+            <h3>Resumen de la compra</h3>
+            <table style="width: 100%; border: 1px solid #000;">
+                <th style="width: 50px;">#</th>
+                <th>Producto en el carrito</th>
+                <th>Descripci&oacute;n</th>
+                <th>Precio</th>
+                {#foreach from=$productos item="p"#}
+                <tr>
+                    <td>{#$p.cantidad#}</td>
+                    <td><img src="../91f5167c34c400758115c2a6826ec2e3/recursos/producto/{#$p.idProducto#}/{#$p.imagen#}" width="40" height="40"/>{#$p.nombre#}</td>
+                    <td>Descripcion</td>
+                    <td align="right">{#$p.precioWeb#}</td>
+                </tr>
+                {#/foreach#}
+                <tr>
+                    <td colspan="2"></td>
+                    <td><strong>TOTAL</strong></td>
+                    <td align="right">{#$total#}</td>
+                </tr>
+            </table>
+            <div align="center" class="grid_12">
+                <input type="button" onclick="cargarCarrito(4);" value="TODO ES CORRECTO"/>
+            </div>
+            {#/if#}
+        </div>
+    </body>
+</html>

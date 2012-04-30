@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>.: COOPCRUCIAL :.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../css/fluid_grid.css" type="text/css" rel="stylesheet"/>
+        <link href="../css/sylesCroopCrucial.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="../js/funciones.js"></script>
+        <!--Cufon-->
+        <script type="text/javascript" src="../js/cufon-juy.js"></script>
+        <script type="text/javascript" src="../js/Futura_LT_700.font.js"></script>
+        <script type="text/javascript">
+            Cufon.replace('.TitulosMenu');
+            Cufon.replace('#ContenedorOfertaHome #Porcentaje');
+            Cufon.replace('#ContenedorRecomendadosHome #Titulo');
+            Cufon.replace('.ContenedorLinksFooter .Titulos');
+            Cufon.replace('.CajaProductosOferta .Precio');
+            Cufon.replace('.CajaProductosOferta .PrecioOline');
+        </script>
+    </head>
+    <body>
+        <div class="container_12">
+            {#include file="header.tpl"#}
+            <div class="grid_8" align="center">
+                <div align="left" style="width: 100%; height: 150px; font-size: 35px; float: left;">{#$msj#}</div>
+                <div id="carrito1" style="width: 100%; height: auto; float: left;">
+                    <table style="width: 100%; border: 1px solid #000; float: left;">
+                        <th style="width: 50px;">#</th>
+                        <th>Producto en el carrito</th>
+                        <th>Descripci&oacute;n</th>
+                        <th>Precio</th>
+                        <tr>
+                            <td>
+                                <input type="text" name="cantidades[]" value="{#$producto.cantidad#}" style="width: 50px;"/>
+                                <input type="hidden" name="idsVentas[]" value="{#$producto.idVenta#}"/><br/>
+                                <a href="javascript:void(0);" onclick="eliminarRegistro({#$producto.idProducto#});">Eliminar</a>
+                            </td>
+                            <td><img src="../91f5167c34c400758115c2a6826ec2e3/recursos/producto/{#$producto.idProducto#}/{#$producto.imagen#}" width="40" height="40"/>{#$producto.nombre#}</td>
+                            <td>Descripcion</td>
+                            <td align="right">{#$producto.precioWeb#}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="grid_4">
+                <table style="border: 1px solid #000;">
+                    <tr>
+                        <td>
+                            <input type="button" value="Ver el carro de compras" onclick="cargarCarrito(1);"/>
+                        </td>
+                        <td>
+                            <input type="button" value="Pagar YA!" onclick="cargarCarrito(1);"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            Tienes {#$carrito.cantidad#} productos por comprar
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            TOTAL ${#$carrito.total#}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2">
+                            <input type="button" value="Comprar todo con 2 clics" style="width: 100%;"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            <div class="grid_12">
+                {#include file="recomendados.tpl"#}
+                {#include file="masComprados.tpl"#}
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            {#include file="footer.tpl"#}
+        </div>
+    </body>
+</html>

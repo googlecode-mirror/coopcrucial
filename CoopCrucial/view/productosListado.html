@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>.: COOPCRUCIAL :.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../css/fluid_grid.css" type="text/css" rel="stylesheet"/>
+        <link href="../css/sylesCroopCrucial.css" type="text/css" rel="stylesheet"/>
+        <style type="text/css">
+            ul li{list-style-type: none;}
+        </style>
+        <script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="../js/funciones.js"></script>
+        <!--Cufon-->
+        <script type="text/javascript" src="../js/cufon-juy.js"></script>
+        <script type="text/javascript" src="../js/Futura_LT_700.font.js"></script>
+        <script type="text/javascript">
+            Cufon.replace('.TitulosMenu');
+            Cufon.replace('#ContenedorOfertaHome #Porcentaje');
+            Cufon.replace('#ContenedorRecomendadosHome #Titulo');
+            Cufon.replace('.ContenedorLinksFooter .Titulos');
+            Cufon.replace('.CajaProductosOferta .Precio');
+            Cufon.replace('.CajaProductosOferta .PrecioOline');
+        </script>
+    </head>
+    <body>
+        <div class="container_12">
+            {#include file="header.tpl"#}
+            <div class="grid_12" style="height: 20px;"></div>
+            <div class="grid_3" style="height: auto;">
+                <div style="float: left; width: 100%;">
+                    <h4 style="background-color: #E1E1E1; color: #666;">Categorias</h4>
+                    <ul>
+                        {#foreach from=$categorias item="c"#}
+                        <li>{#$c#}</li>
+                        {#/foreach#}
+                    </ul>
+                </div>
+                <div style="float: left; width: 100%;">
+                    <h4 style="background-color: #E1E1E1; color: #666;">Usted ha seleccionado</h4>
+                    <ul>
+                        {#if $smarty.session.busqueda.categoria!=""#}
+                        <li>Categor&iacute;a: {#$smarty.session.busqueda.categoria#}</li>
+                        {#/if#}
+                        {#if $smarty.session.busqueda.precio!=""#}
+                        <li>Precio: {#$smarty.session.busqueda.precio#}</li>
+                        {#/if#}
+                        {#if $smarty.session.busqueda.marca!=""#}
+                        <li>Marca: {#$smarty.session.busqueda.marca#}</li>
+                        {#/if#}
+                        {#if $smarty.session.busqueda.calificacion!=""#}
+                        <li>Calificaci&oacute;n: {#$smarty.session.busqueda.calificacion#} estrellas</li>
+                        {#/if#}
+                    </ul>
+                </div>
+                <div style="float: left; width: 100%;">
+                    <h4 style="background-color: #E1E1E1; color: #666;">Precios</h4>
+                    <ul>
+                        {#foreach from=$rangosPrecios item="rp"#}
+                        <li>{#$rp#}</li>
+                        {#/foreach#}
+                    </ul>
+                </div>
+                <div style="float: left; width: 100%;">
+                    <h4 style="background-color: #E1E1E1; color: #666;">Marcas</h4>
+                    <ul>
+                        {#foreach from=$marcas item="m"#}
+                        <li>{#$m#}</li>
+                        {#/foreach#}
+                    </ul>
+                </div>
+                <div style="float: left; width: 100%;">
+                    <h4 style="background-color: #E1E1E1; color: #666;">Calificaciones</h4>
+                    <ul>
+                        {#foreach from=$calificaciones item="c"#}
+                        <li>{#$c#}</li>
+                        {#/foreach#}
+                    </ul>
+                </div>
+            </div>
+            <div class="grid_9" id="divResultado" style="height: auto;">
+                {#foreach from=$productos item="p"#}
+                <div style="float: left; width: 100%; height: auto;">
+                    <div style="float: left; width: 25%; height: auto;">
+                        <a href="javascript:void(0);" onclick="cargarProducto('{#$p.idProducto#}');">
+                            <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/producto/{#$p.idProducto#}/{#$p.imagen#}" width="100%" height="200"/>
+                        </a>
+                    </div>
+                    <div style="float: left; width: 50%;">
+                        <a href="javascript:void(0);" onclick="cargarProducto('{#$p.idProducto#}');">
+                            <label style="cursor: pointer;"><strong>{#$p.nombre#}</strong></label>
+                        </a><p/>
+                        <label>{#$p.descripcion|truncate:200#}</label><p/>
+                        <label>Garantia: {#$p.garantia#}</label><p/>
+                        <label>Calificaci&oacute;n clientes: {#$p.calificacion#}</label><p/>
+                    </div>
+                    <div style="float: left; width: 25%; height: auto;">
+                        <label style="text-decoration: line-through; text-align: right;">{#$p.precio#}</label><br/>
+                        <label>Precio: {#$p.precioWeb#}</label><br/>
+                        <input type="button" onclick="agregarCarrito({#$p.idProducto#},1);" value="Agregar al carrito" {#if $smarty.session.usuario.nombre==""#}disabled{#/if#}/>
+                               <input type="button" value="Comprar ahora"/>
+                    </div>
+                </div>
+                <hr/>
+                {#/foreach#}
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            {#include file="footer.tpl"#}
+        </div>
+    </body>
+</html>

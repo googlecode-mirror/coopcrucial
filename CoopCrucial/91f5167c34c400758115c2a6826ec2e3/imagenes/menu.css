@@ -1,0 +1,85 @@
+  body {
+    font-family:arial,helvetica,verdana,"times new roman",sans-serif;
+    font-size:11px;
+    }
+    #classes-menu-left{
+        width: 324px;
+        height: 331px;
+        background: #F9F9F9 url("./../../images/bg_fly_v1_1.png") bottom;
+        overflow: hidden;
+        -moz-box-shadow: 1px 1px 2px #333; /* Firefox */
+        -webkit-box-shadow: 1px 1px 2px #333; /* Safari and Chrome */
+        box-shadow: 1px 1px 3px #333; /* Opera 10.5+, future browsers and IE6+ using IE-CSS3 */
+        behavior: url("./../../js/external/ie-css3.htc); /* This lets IE know to call the script on all elements which get the 'box' class */
+
+    }
+    #classes-menu-left .col-left, #classes-menu-left .col-right{
+        width: 148px;
+        float: left;
+        overflow: hidden;
+    }
+    #classes-menu-left .col-right{
+        float: right;
+        border: 1px solid;
+    }
+    #classes-menu-left .col-left ul, #classes-menu-left .col-right dl dd ul{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    #classes-menu-left .col-left ul li, #classes-menu-left .col-right dl dd ul li{
+        margin: 2px 0 0 0;
+        border-bottom: 1px solid #D8D8D8;
+    }
+    #classes-menu-left .col-left ul li a {
+        margin-left : 8px;
+        text-decoration: none;
+        color: #000;
+    }
+    #classes-menu-left .col-left .highlight-image{
+        position: relative;
+        width: 100%; /* for IE 6 */
+    }
+    #classes-menu-left .col-left .highlight-image span{
+        position: absolute;
+        top: 90%;
+        left: 8px;
+        width: 126px;
+        height: 20px;
+        background: url("./../../images/button1.png") no-repeat;
+        border: 0;
+        display: block;
+        line-height: 18px;
+        text-align: center;
+        cursor: pointer;
+    }
+    #classes-menu-left .col-right dl{
+        margin: 0;
+        padding: 0;
+    }
+    #classes-menu-left .col-right dl dt{
+        color: #666;
+        border-bottom: 1px solid #D8D8D8;
+    }
+    #classes-menu-left .col-right dl dt span{
+        margin-left : 8px;
+    }
+    #classes-menu-left .col-right dl dd{
+        margin: 0;
+        padding: 0;
+    }
+    #classes-menu-left .col-right dl dd ul li{
+        margin: 0;       
+    }
+    #classes-menu-left .col-right dl dd ul li a{
+        background: url("./../../images/arrow_right_ant_cyan.gif") no-repeat 100% 5px;
+        display: block;
+        text-decoration: none;
+        color: #000;
+        text-indent: 8px;
+        padding: 3px 0 0 0;
+    }
+    #classes-menu-left .col-right dl dd ul li a:hover{
+        background: url("./../../images/arrow_right_ant_cyan.gif") no-repeat 100% -29px #EFEFEF;
+        display: block;
+    }

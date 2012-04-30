@@ -1,0 +1,388 @@
+body
+{
+	font-size:12px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.clear
+{
+	clear:both;
+}
+.relativo
+{
+	position:relative;
+}
+.imagenesGaleria{
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+#ContenedorIngresoUsuario
+{
+	background-image:url(../imagenes/fondo_pestana_login.png);
+	width:396px;
+	height:45px;
+	background-repeat:no-repeat;
+	padding:10px 0px 0px 10px;
+}
+#ContenedorCarroCompras
+{
+	background-image:url(../imagenes/pestana_superior.png);
+	width:348px;
+	height:48px;
+	background-repeat:no-repeat;
+}
+
+.BotonGeneralRojo
+{
+	cursor:pointer;
+}
+.BotonGeneralRojoIzquierda
+{
+	background-image:url(../imagenes/boton_rojo_izquierdo.png);
+	width:5px;
+	height:27px;
+	float:left;
+}
+.BotonGeneralRojoCentro
+{
+	background-image:url(../imagenes/boton_rojo_centro.png);
+	background-repeat:repeat-x;
+	height:22px;
+	float:left;
+	color:#FFF;
+	font-weight:bold;
+	text-align:center;
+	padding:5px 5px 0px 5px;
+}
+.BotonGeneralRojoCentro2
+{
+	background-image:url(../imagenes/boton_rojo_centro.png);
+	background-repeat:repeat-x;
+	height:22px;
+	float:left;
+	color:#FFF;
+	font-weight:bold;
+	text-align:center;
+	font-size:12px; 
+	padding: 6px 5px 0px 3px;
+}
+.BotonGeneralRojoCentro2 span
+{
+	margin:0px 0px 0px 5px;
+}
+.BotonGeneralRojoDerecha
+{
+	background-image:url(../imagenes/boton_rojo_derecho.png);
+	width:5px;
+	height:27px;
+	float:left;
+}
+
+.InputsIngreso
+{
+	width:140px;
+	height:27px;
+	background-color:#FFF;
+	border:1px solid #CCCCCC;
+	color:#999999;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	margin:0px 5px 0px 0px;
+}
+#ContenedorMenu
+{
+	background-image:url(../imagenes/fondo_botonera_principal.png);
+	width:944px;
+	height:59px;
+	background-repeat:no-repeat;
+	
+}
+.TitulosMenu
+{
+	width:25px;
+	text-align:center;
+	width:145px;
+	height:32px;
+	color:#FFF;
+	border-right:1px solid #666666;
+	cursor:pointer;
+	float:left;
+	font-size:18px;
+	padding:15px 0px 0px 0px;
+	margin:5px 0px 0px 0px;
+}
+.ContenedorBuscador
+{
+	float:left;
+	width:641px;
+	height:47px;
+	margin:12px 0px 0px 0px;
+}
+.InputBuscador
+{
+	width:607px;
+	height:32px;
+}
+#ContenedorBotonesNecesitaAyuda
+{
+	color:#999999;
+}
+#ContenedorBotonesNecesitaAyuda a
+{
+	text-decoration:none;
+	color:#999999;
+}
+
+
+#divCategorias
+{
+	border:1px solid #E6E6E6;
+	border-top:0px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	width:925px;
+	margin:0px 0px 0px 18px;
+}
+
+.ContenedorDestacadosPrincipalesHome
+{
+	border:1px solid #CCCCCC;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	
+}
+#ContenedorOfertaHome
+{
+	background-image:url(../imagenes/fondo_barra_promocion.png);
+	
+	height:34px;
+	background-repeat:no-repeat;
+	padding:0px 0px 0px 0px;
+	margin-top:7px;
+}
+#ContenedorOfertaHome #Porcentaje
+{
+	color:#FFCC00;
+	font-size:23px;
+	margin:6px 0px 0px 10px;
+}
+#ContenedorOfertaHome #Decripcion
+{
+	
+	
+}
+#ContenedorOfertaHome #Decripcion #Titulo
+{
+	font-size:12px;
+	font-weight:bold;
+	font-family:Verdana, Geneva, sans-serif;
+	
+}
+#ContenedorOfertaHome #Decripcion #Texto
+{
+	color:#CCCCCC;
+	font-size:10px;
+	font-weight:bold;
+	font-family:Verdana, Geneva, sans-serif;
+	
+}
+#ContenedorOfertaHome #ContenedorBotonVeOferta
+{
+	float:left;
+	background-image:url(../imagenes/icono_flecha_promocion.png);
+	width:44px;
+	height:34px;
+	background-repeat:no-repeat;
+	margin:0px 0px 0px 100px;
+}
+
+
+#ContenedorRecomendadosHome
+{
+	border:1px solid #EBEBEB;
+	padding:10px 0px 0px 0px;
+	background-color:#FFF;
+}
+#ContenedorRecomendadosHome #Titulo
+{
+	color:#EC1C23;
+	font-size:20px;
+	font-weight:bold;
+	margin:0px 0px 0px 10px;
+}
+#ContenedorRecomendadosHome #SubTitulo
+{
+	color:#999999;
+	font-size:14px;
+	margin:0px 0px 20px 10px;
+}
+
+.CajaProductosOferta
+{
+	width:282px;
+	/*background-color:#0C6;*/
+	float:left;
+	margin:0px 0px 0px 10px;
+}
+.CajaProductosOferta .Titulo
+{
+	font-size:15px;
+	color:#999999;
+	font-family:Verdana, Geneva, sans-serif;
+	font-weight:bold;
+	margin:5px 0px 0px 0px;
+}
+.CajaProductosOferta .Precio
+{
+	width:133px;
+	font-size:18px;
+	font-weight:bold;
+	float:left;
+	
+	border-right:3px solid #000;
+	padding:4px 0px 0px 0px;
+	height:20px;
+}
+.CajaProductosOferta .PrecioOline
+{
+	width:140px;
+	font-size:20px;
+	color:#E21117;
+	font-weight:bold;
+	float:left;
+	padding:4px 0px 0px 0px;
+	height:20px;
+	margin:0px 0px 0px 5px;
+	
+}
+.CajaProductosOferta table
+{
+
+	margin:5px 0px 0px 0px;
+	
+}
+
+.BotonAgregar2
+{
+	background-image:url(../imagenes/boton_agregar_carrito.png);
+	width:110px;
+	height:23px;
+	background-repeat:no-repeat;
+	font-weight:bold;
+	font-size:12px;
+	padding:6px 0px 0px 34px;
+	cursor:pointer;
+}
+
+
+
+.CajaProductoRecomendado
+{
+	width:136px;
+	/*background-color:#0C0;*/
+	float:left;
+	cursor:pointer;
+	margin:0px 12px 0px 3px;
+	overflow:hidden;
+}
+.CajaProductoRecomendado img
+{
+	margin:0px 0px 0px 10px;
+}
+.CajaProductoRecomendado a
+{
+
+	text-decoration:none;
+}
+.CajaProductoRecomendado .Titulo
+{
+	color:#999999;
+	font-size:14px;
+	cursor:pointer;
+	
+}
+.CajaProductoRecomendado .Precio
+{
+	color:#666666;
+	cursor:pointer;
+	font-weight:bold;
+	margin:3px 0px 0px 0px;
+	
+}
+.CajaProductoRecomendado .PrecioOnline
+{
+	font-size:14px;
+	color:#EC1C23;
+	cursor:pointer;
+	font-weight:bold;
+	margin:3px 0px 0px 0px;
+}
+.CajaProductoRecomendado .BotonAgregar
+{
+	background-image:url(../imagenes/boton_agregar_carrito%5B1%5D.png);
+	width:119px;
+	height:24px;
+	background-repeat:no-repeat;
+	text-align:center;
+	font-weight:bold;
+	padding:5px 0px 0px 0px;
+	margin:4px 0px 0px 0px;
+	
+	
+}
+
+#ContenedorFooter
+{
+	background-image:url(../imagenes/fondo_footer.png);
+	width:908px;
+	height:136px;
+	background-repeat:no-repeat;
+	margin:0px 0px 20px 0px;
+	padding:20px 0px 0px 35px;
+}
+.LogoFooter
+{
+	width:157px;
+	height:115px;
+	float:left;
+	margin:0px 0px 0px 0px;
+}
+.ContenedorLinksFooter
+{
+	width:188px;
+	float:left;
+	/*background-color:#0CC;*/
+	margin:0px 0px 0px 90px;
+}
+.ContenedorLinksFooter .Titulos
+{
+	font-size:20px;
+	color:#666666;
+	font-weight:bold;
+}
+.ContenedorLinksFooter table
+{
+	margin:10px 0px 0px 0px;
+}
+.ContenedorLinksFooter .Icono
+{
+	width:5px;
+	height:5px;
+	background-color:#FFCC00;
+}
+.ContenedorLinksFooter a
+{
+	font-size:12px;
+	color:#999999;
+	text-decoration:none;
+	margin:0px 0px 0px 5px;
+}
+.ContenedorLinksFooter .IconoRedSocial
+{
+	padding:0px 0px 0px 20px;
+}
+
+
+
+
+

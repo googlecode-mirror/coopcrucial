@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>.: COOPCRUCIAL :.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../css/fluid_grid.css" type="text/css" rel="stylesheet"/>
+        <link href="../css/sylesCroopCrucial.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="../js/funciones.js"></script>
+        <!--Cufon-->
+        <script type="text/javascript" src="../js/cufon-juy.js"></script>
+        <script type="text/javascript" src="../js/Futura_LT_700.font.js"></script>
+        <script type="text/javascript">
+            Cufon.replace('.TitulosMenu');
+            Cufon.replace('#ContenedorOfertaHome #Porcentaje');
+            Cufon.replace('#ContenedorRecomendadosHome #Titulo');
+            Cufon.replace('.ContenedorLinksFooter .Titulos');
+            Cufon.replace('.CajaProductosOferta .Precio');
+            Cufon.replace('.CajaProductosOferta .PrecioOline');
+        </script>
+    </head>
+    <body>
+        <div class="container_12">
+            {#include file="header.tpl"#}
+            <div class="grid_8 ContenedorDestacadosPrincipalesHome" style="width:571px;" >
+                <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/imagenHome/{#$imagenHome.imagen#}" width="571" height="300"/>
+            </div>
+            <div class="grid_4 ContenedorDestacadosPrincipalesHome" align="right" style="width:345px;">
+                <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/ofertaEspecial/{#$ofertaEspecial.imagen#}" width="100%" height="300"/>
+                <img src="../images/marca.png" style="position: absolute; top: -5px; left: 60%;" width="125" height="70"/>
+            </div>
+            <div id="ContenedorOfertaHome" class="grid_12" >
+                <div id="Porcentaje" class="grid_1" >40%</div>
+                <div id="Decripcion" class="grid_11" style="color: #fff; width:706px;">
+                    <div id="Titulo">Extintores en Oferta</div>
+                    <div id="Texto"> Por el mes de Vacaciones, encuentra todos nuestros productos de PISCINAS y KITS de viaje con descuentos de hasta el 40%
+                    </div>
+                </div>
+                <div id="ContenedorBotonVeOferta"></div>
+            </div>
+            <div class="grid_12 " style="height: 20px;"></div>
+            {#foreach from=$destacados item="d"#}
+            <div class="CajaProductosOferta">
+                <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/producto/{#$d.idProducto#}/{#$d.imagen#}" width="282" height="200"/>
+                <div>
+                    <div class="Titulo">{#$d.nombre#}</div>
+                    <div class="Precio">PRECIO: $80.0000 </div>
+                    <div class="PrecioOline">ON LINE: {#$d.precioWeb#}</div>
+                    <div class="clear"></div>
+                    <table width="270" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="150"><div class="BotonAgregar2">Agregar al carrito</div></td>
+                            <td width="120"><div class="BotonGeneralRojo" onclick="iniciarSesion();" >
+                                    <div class="BotonGeneralRojoIzquierda"></div>
+                                    <div class="BotonGeneralRojoCentro2">
+                                        <img src="../imagenes/icono_flecha_punteada.png" width="5" height="9">
+                                        <span>Ingresar</span>
+                                    </div>
+                                    <div class="BotonGeneralRojoDerecha"></div>
+                                    <div class="clear"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            {#/foreach#}
+            {#if count($destacados)==1#}
+            <div class="grid_4">
+                <div style="float: left; width: 50%; height: 200px;"></div>
+                <div style="float: left; width: 50%; height: 200px;"></div>
+            </div>
+            {#/if#}
+            <div class="grid_4">
+                <img src="../images/ciudad.png" width="100%" height="200"/>
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            <div id="ContenedorRecomendadosHome" class="grid_12" style="">
+                {#include file="recomendados.tpl"#}
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            {#include file="masComprados.tpl"#}
+            <div class="grid_12" style="height: 20px;"></div>
+            {#include file="footer.tpl"#}
+        </div>
+    </body>
+</html>

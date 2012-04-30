@@ -1,0 +1,34 @@
+.rater{
+    float:left;
+    cursor:pointer;
+    width:96px;
+    z-index:6;
+}
+
+span.mouseOn{
+    display:block;
+    float:left;
+    background-image:url('../images/gSelected.gif');
+    width:16px;
+    height:15px;
+}
+
+span.mouseOff{
+    display:block;
+    float:left;
+    background-image:url('../images/bSelected.gif');
+    width:16px;
+    height:15px;
+}
+
+span.blank{
+    display:block;
+    float:left;
+    background-image:url('../images/blank.gif');
+    width:16px;
+    height:15px;
+}
+
+div.clear{
+    clear:both;
+}

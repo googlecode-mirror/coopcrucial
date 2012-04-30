@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>.: COOPCRUCIAL :.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../css/fluid_grid.css" type="text/css" rel="stylesheet"/>
+        <link href="../css/sylesCroopCrucial.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="../js/funciones.js"></script>
+        <!--Cufon-->
+        <script type="text/javascript" src="../js/cufon-juy.js"></script>
+        <script type="text/javascript" src="../js/Futura_LT_700.font.js"></script>
+        <script type="text/javascript">
+            Cufon.replace('.TitulosMenu');
+            Cufon.replace('#ContenedorOfertaHome #Porcentaje');
+            Cufon.replace('#ContenedorRecomendadosHome #Titulo');
+            Cufon.replace('.ContenedorLinksFooter .Titulos');
+            Cufon.replace('.CajaProductosOferta .Precio');
+            Cufon.replace('.CajaProductosOferta .PrecioOline');
+        </script>
+        {#if $reset == 1#}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#atrPwd").toggle("slow");
+            });
+        </script>
+        {#/if#}
+    </head>
+    <body>
+        <div class="container_12">
+            {#include file="header.tpl"#}
+            <div class="grid_12">
+                <h1>Bienvenido: {#$usuario.nombre#} {#$usuario.apellidos#}</h1>
+                <h3>Este es tu perfil de registro, donde podrás actualizar o editar información de tu interés personal.</h3>
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            <div class="grid_12">
+                <div style="width: 100%; height: auto; float: left;">
+                    <div style="width: auto; border: 1px solid #000; cursor: pointer; float: left;" onclick="divsPerfil(1);">Perfil de Registro</div>
+                    <div style="width: auto; border: 1px solid #000; cursor: pointer; float: left;" onclick="divsPerfil(2);">Direcciones de entrega registradas</div>
+                    <div style="width: auto; border: 1px solid #000; cursor: pointer; float: left;" onclick="divsPerfil(3);">Historial de Compras</div>
+                </div>
+                <div id="divPerfil" style="width: 98%; height: auto; border: 1px solid #000; float: left;">
+                    <table style="width: 50%; float: left;">
+                        <tr>
+                            <td colspan="3" style="font-weight: bold;">Configuraci&oacute;n personal de la cuenta</td>
+                        </tr>
+                        <tr>
+                            <td>Nombres:</td>
+                            <td>{#$usuario.nombre#}</td>
+                            <td><a href="javascript:void(0);" onclick="editar('Nombre');">Editar</a></td>
+                        </tr>
+                        <tr id="atrNombre" style="display: none;">
+                            <td colspan="3" style="border: 1px solid #000;">
+                                <div>
+                                    <label>Nuevo nombre:</label>&nbsp;<input type="text" id="n_nombre"/><br/>
+                                    <input type="button" value="Guardar nombre" onclick="editarCampo('nombre','{#$usuario.idUsuario#}');"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Apellidos:</td>
+                            <td>{#$usuario.apellidos#}</td>
+                            <td><a href="javascript:void(0);" onclick="editar('Apellido');">Editar</a></td>
+                        </tr>
+                        <tr id="atrApellido" style="display: none;">
+                            <td colspan="3" style="border: 1px solid #000;">
+                                <div>
+                                    <label>Nuevo apellido:</label>&nbsp;<input type="text" id="n_apellidos"/><br/>
+                                    <input type="button" value="Guardar apellidos" onclick="editarCampo('apellidos','{#$usuario.idUsuario#}');"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Correo:</td>
+                            <td>{#$usuario.correoElectronico#}</td>
+                            <td><a href="javascript:void(0);" onclick="editar('Correo');">Editar</a></td>
+                        </tr>
+                        <tr id="atrCorreo" style="display: none;">
+                            <td colspan="3" style="border: 1px solid #000;">
+                                <div>
+                                    <label>Nuevo correo:</label>&nbsp;<input type="text" id="n_correoElectronico"/><br/>
+                                    <input type="button" value="Guardar correo" onclick="editarCampo('correoElectronico','{#$usuario.idUsuario#}');"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Contrase&ntilde;a:</td>
+                            <td>Cambia tu contrase&ntilde;a</td>
+                            <td><a href="javascript:void(0);" onclick="editar('Pwd');">Editar</a></td>
+                        </tr>
+                        <tr id="atrPwd" style="display: none;">
+                            <td colspan="3" style="border: 1px solid #000;">
+                                <div>
+                                    <label>Nueva contrase&ntilde;a:</label>&nbsp;<input type="password" id="n_contrasenia"/><br/>
+                                    <input type="button" value="Guardar contrase&ntilde;a" onclick="editarCampo('contrasenia','{#$usuario.idUsuario#}');"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pais:</td>
+                            <td>{#$usuario.pais#}</td>
+                            <td><a href="javascript:void(0);" onclick="editar('Pais');">Editar</a></td>
+                        </tr>
+                        <tr id="atrPais" style="display: none;">
+                            <td colspan="3" style="border: 1px solid #000;">
+                                <div>
+                                    <label>Nuevo Pais:</label>&nbsp;
+                                    <select id="n_pais" onchange="consultarCiudades();">
+                                        <option value="">---</option>
+                                        {#html_options options=$paises#}
+                                    </select><br/>
+                                    <input type="button" value="Guardar Pais" onclick="editarCampo('pais','{#$usuario.idUsuario#}');" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ciudad:</td>
+                            <td>{#$usuario.ciudad#}</td>
+                            <td><a href="javascript:void(0);" onclick="editar('Ciudad');">Editar</a></td>
+                        </tr>
+                        <tr id="atrCiudad" style="display: none;">
+                            <td colspan="3" style="border: 1px solid #000;">
+                                <div>
+                                    <label>Nueva Ciudad:</label>&nbsp;
+                                    <div id="divCiudad" align="left" style="width: 70%;">
+                                        <select id="n_ciudad" name="ciudad" style="width: auto;">
+                                            <option value="">---</option>
+                                        </select>
+                                    </div>
+                                    <input type="button" value="Guardar Ciudad" onclick="editarCampo('ciudad','{#$usuario.idUsuario#}');"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Telefono:</td>
+                            <td>{#$usuario.telefono#}</td>
+                            <td><a href="javascript:void(0);" onclick="editar('Telefono');">Editar</a></td>
+                        </tr>
+                        <tr id="atrTelefono" style="display: none;">
+                            <td colspan="3" style="border: 1px solid #000;">
+                                <div>
+                                    <label>Nuevo telefono:</label>&nbsp;<input type="text" id="n_tel"/><br/>
+                                    <input type="button" value="Guardar telefono" onclick="editarCampo('tel','{#$usuario.idUsuario#}');"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width: 50%; float: left;">
+                        <tr>
+                            <td colspan="3"><input type="button" value="GUARDAR CAMBIOS"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Cu&eacute;ntanos acerca de tus intereses:</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Selecciona tus gustos o intereses y así podremos enviarte promociones, descuentos y ofertas de tu completo interés</td>
+                        </tr>
+                        <tr>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                            <td>Seguridad<input type="checkbox" name="preferencias[]" value="1"/></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="divDirecciones" style="width: 98%; height: auto; border: 1px solid #000; float: left; display: none;">
+                    <div style="width: 30%; float: left;">
+                        {#foreach name="dir" from=$direcciones item="d"#}
+                        <div style="width: 100%; height: 100px; float: left; {#if $smarty.foreach.dir.iteration == 1#} background: url('../images/barraDireccion.PNG') no-repeat;{#else#} border: 1px solid #000;{#/if#}">
+                            <label><strong>Direcci&oacute;n Principal</strong></label><br/>
+                            <label><strong>Tel&eacute;fono:</strong> {#$d.telefono#}</label><br/>
+                            <label><strong>Direcci&oacute;n:</strong> {#$d.direccion#}</label><br/>
+                            <input type="radio" name="direccion" onclick="cargarDireccion('{#$d.idDireccion#}');"/>Direcci&oacute;n para esta entrega
+                        </div>
+                        {#/foreach#}
+                        <div style="width: 100%; height: 30px; border: 1px solid #000; cursor: pointer; float: left;" onclick="nuevaDireccion();">
+                            Ingresar nueva direcci&oacute;n
+                        </div>
+                    </div>
+                    <div style="width: 65%; margin-left: 20px; float: left;">
+                        <div id="divDireccionPredeterminada" style="width: 100%; float: left;">
+                            <label><strong>{#$smarty.session.usuario.nombre#}, estos los productos serán entregados a:</strong></label><p/>
+                            <table>
+                                <tr>
+                                    <td align="right"><strong>Pa&iacute;s:</strong></td>
+                                    <td>{#$direccion.pais#}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><strong>Ciudad:</strong></td>
+                                    <td>{#$direccion.ciudad#}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><strong>Direcci&oacute;n:</strong></td>
+                                    <td>{#$direccion.direccion#}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><strong>Tel&eacute;fono:</strong></td>
+                                    <td>{#$direccion.telefono#}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><strong>Celular:</strong></td>
+                                    <td>{#$direccion.celular#}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><strong>Correo Electr&oacute;nico:</strong></td>
+                                    <td>{#$direccion.correoElectronico#}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="divNuevaDireccion" style="width: 100%; display: none; float: left;">
+                            <label><strong>Ingresar la nueva direcci&oacute;n que quieres en el sistema</strong></label><p/>
+                            <form id="frm_direccion" action="" method="post">
+                                <table>
+                                    <tr>
+                                        <td align="right"><strong>Tel&eacute;fono</strong></td>
+                                        <td>
+                                            <input type="text" id="telefono" name="telefono"/><br/>
+                                            <input type="radio" name="lugarTelefono" value="oficina"/>Oficina
+                                            <input type="radio" name="lugarTelefono" value="casa" checked/>Casa
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><strong>Pais</strong></td>
+                                        <td>
+                                            <select id="n_pais" name="pais" onclick="consultarCiudades();">
+                                                <option value="">Seleccione su pais de residencia</option>
+                                                {#html_options options=$paises#}
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><strong>Ciudad</strong></td>
+                                        <td>
+                                            <div id="divCiudad">
+                                                <select id="ciudad" name="ciudad">
+                                                    <option value="">Seleccione la ciudad</option>
+                                                    {#html_options options=$ciudades#}
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right"><strong>Direcci&oacute;n</strong></td>
+                                        <td>
+                                            <input type="text" id="direccion" name="direccion"/><br/>
+                                            <input type="radio" name="lugarDireccion" value="oficina"/>Oficina
+                                            <input type="radio" name="lugarDireccion" value="casa" checked/>Casa
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" align="right">
+                                            <strong>Hacer esta direcci&oacute;n la de entrega predeterminada</strong><br/>
+                                            <input type="radio" name="direccionPredeterminada" value="1"/>SI
+                                            <input type="radio" name="direccionPredeterminada" value="0" checked/>NO
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                            <div align="center" style="width: 100%; float: left;">
+                                <input type="button" onclick="guardarDireccion();" value="GUARDAR NUEVA DIRECCION"/>
+                                <input type="hidden" id="idDireccion" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="divHistorial" style="width: 98%; height: auto; border: 1px solid #000; float: left; display: none;">
+                    <h3>Historial de Compras</h3>
+                    {#foreach from=$ventas item="vent"#}
+                    <div align="center" style="float: left; width: 100%; height: auto; margin-bottom: 20px;">
+                        <table style="width: 90%; border: 1px solid #000;">
+                            <th style="width: 50px;">#</th>
+                            <th style="width: 200px;">Producto en el carrito</th>
+                            <th style="width: 150px;">Descripci&oacute;n</th>
+                            <th style="width: 150px;">Precio</th>
+                            <th style="width: 100px;">Fecha</th>
+                            <th style="width: 100px;">Venta</th>
+                            {#foreach from=$vent item="v"#}
+                            <tr>
+                                <td>{#$v.cantidad#}</td>
+                                <td><img src="../91f5167c34c400758115c2a6826ec2e3/recursos/producto/{#$v.idProducto#}/{#$v.imagen#}" width="40" height="40"/>{#$v.nombre#}</td>
+                                <td>Descripcion</td>
+                                <td align="right">{#$v.precioWeb#}</td>
+                                <td align="right">{#$v.fecha#}</td>
+                                <td align="right">{#$v.idVenta#}</td>
+                            </tr>
+                            {#/foreach#}
+                            <tr>
+                                <td colspan="4"></td>
+                                <td><strong>TOTAL</strong></td>
+                                <td align="right">{#$total#}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    {#/foreach#}
+                </div>
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            {#include file="footer.tpl"#}
+        </div>
+    </body>
+</html>

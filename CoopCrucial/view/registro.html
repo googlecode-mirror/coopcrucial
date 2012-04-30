@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>.: COOPCRUCIAL :.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../css/fluid_grid.css" type="text/css" rel="stylesheet"/>
+        <link href="../css/sylesCroopCrucial.css" type="text/css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="../css/jquery.ui.all.css">
+        <script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+        <script src="../js/jquery.ui.core.js"></script>
+        <script src="../js/jquery.ui.widget.js"></script>
+        <script src="../js/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="../js/funciones.js"></script>
+        <!--Cufon-->
+        <script type="text/javascript" src="../js/cufon-juy.js"></script>
+        <script type="text/javascript" src="../js/Futura_LT_700.font.js"></script>
+        <script type="text/javascript">
+            Cufon.replace('.TitulosMenu');
+            Cufon.replace('#ContenedorOfertaHome #Porcentaje');
+            Cufon.replace('#ContenedorRecomendadosHome #Titulo');
+            Cufon.replace('.ContenedorLinksFooter .Titulos');
+            Cufon.replace('.CajaProductosOferta .Precio');
+            Cufon.replace('.CajaProductosOferta .PrecioOline');
+        </script>
+        <style type="text/css">
+            #divRegistro div{float: left;}
+            #divRegistro div{padding: 5px 0px 5px 0px;}
+            #ui-datepicker-div{border-collapse: collapse; font-size: 0.6em !important;}
+        </style>
+        <script type="text/javascript">
+            $(function() {
+                var fecha = new Date();
+                $( "#datepicker" ).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    minDate: new Date(fecha.getFullYear()-80,fecha.getMonth(),fecha.getDay()),
+                    maxDate: new Date(fecha.getFullYear()-15,fecha.getMonth(),fecha.getDay()+7)
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container_12">
+            {#include file="header.tpl"#}
+            <div class="grid_7" id="divRegistro">
+                <form name="frm_registro" id="frm_registro" action="" method="post">
+                    <div align="right" style="width: 30%;">
+                        <label>Nombre</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="nombre" name="nombre" style="width: 300px;"/>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Apellidos</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="apellidos" name="apellidos" style="width: 300px;"/>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Tipo de Documento</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <select id="tipoDocumento" name="tipoDocumento" style="width: 300px;">
+                            <option value="">---</option>
+                            {#html_options options=$tiposDocumento#}
+                        </select>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>N&uacute;mero Documento</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="numeroDocumento" name="numeroDocumento" onblur="validarDocumento();" style="width: 300px;"/>
+                        <label id="avisoDoc" style="color: #f00; display: none;">Documento ya existente.</label>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Fecha de Nacimiento</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="datepicker" name="fechaNacimiento" readonly/>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Correo Electr&oacute;nico</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="correo" name="correo" style="width: 300px;"/>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Confirmaci&oacute;n correo</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="correo1" name="correo1" style="width: 300px;"/>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Celular</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="cel" name="cel" style="width: 300px;"/>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Tel&eacute;fono</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="telefono" name="telefono" style="width: 300px;"/><br/>
+                        <input type="radio" name="lugarTelefono" value="oficina"/>Oficina
+                        <input type="radio" name="lugarTelefono" value="casa" checked/>Casa
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Pais</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <select id="n_pais" name="pais" style="width: auto;" onchange="consultarCiudades();">
+                            <option value="">Seleccione su pais de residencia</option>
+                            {#html_options options=$paises#}
+                        </select>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Ciudad</label>
+                    </div>
+                    <div id="divCiudad" align="left" style="width: 70%;">
+                        <select id="ciudad" name="ciudad" style="width: auto;">
+                            <option value="">Seleccione la ciudad</option>
+                        </select>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Direcci&oacute;n</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="direccion" name="direccion" style="width: 300px;"/><br/>
+                        <input type="radio" name="lugarDireccion" value="oficina"/>Oficina
+                        <input type="radio" name="lugarDireccion" value="casa" checked/>Casa
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Nombre de Usuario</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="text" id="usuario" name="usuario" onblur="validarUsuario();" style="width: 300px;"/>
+                        <label id="avisoUsuario" style="color: #f00; display: none;">Nombre de usuario ya existente.</label>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Contrase&ntilde;a:</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="password" id="pwd" name="pwd" style="width: 300px;" size="6"/>
+                    </div>
+                    <div align="right" style="width: 30%;">
+                        <label>Repetir contrase&ntilde;a:</label>
+                    </div>
+                    <div align="left" style="width: 70%;">
+                        <input type="password" id="pwd1" name="pwd1" style="width: 300px;" size="6"/>
+                    </div>
+                    <h3>Actualizaci&oacute;n y promociones</h3>
+                    <label>¿Desea recibir actualizaciones por medio de correo electr&oacute;nico?</label>
+                    <input type="radio" name="actualizaciones" value="1" checked/>Si
+                    <input type="radio" name="actualizaciones" value="0"/>No
+                    <br/>
+                    <label>¿Desea recibir promociones por medio de su correo electr&oacute;nico?</label>
+                    <input type="radio" name="promociones" value="1" checked/>Si
+                    <input type="radio" name="promociones" value="0"/>No
+                    <h3>T&eacute;rminos y Condiciones</h3>
+                    <label>Acepta los t&eacute;rminos y condiciones de uso e informaci&oacute;n de la Cooperativa Coopcrucial.</label>
+                    <input type="radio" name="terminos" value="1"/>Si
+                    <input type="radio" name="terminos" value="0" checked/>No
+                    <p/>
+                    <div style="float: left; width: 100%; height: 200px; overflow: scroll;">
+                        Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui sollicitudin
+                        sollicitudin. In conspectu solicitus facilitus nae. Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt
+                        Curabitur at dui malesuada dui sollicitudin sollicitudin. In conspectu solicitus facilitus nae. Nullam dignissim pulvinar sem, in
+                        tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in
+                        tincidunt  Curabitur at dui malesuada dui sollicitudin sollicitudin. In conspectu solicitus facilitus nae. Nullam dignissim
+                        pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui sollicitudin sollicitudin.
+                        In conspectu solicitus facilitus nae. Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt
+                        Curabitur at dui Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui
+                        sollicitudin sollicitudin. In conspectu solicitus facilitus nae. Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem,
+                        in tincidunt  Curabitur at dui malesuada dui sollicitudin sollicitudin. In conspectu solicitus facilitus nae. Nullam dignissim
+                        pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui Nullam dignissim pulvinar sem, in tincidunt diam
+                        volutpat a sem, in tincidunt  Curabitur at dui malesuada dui sollicitudin sollicitudin. In conspectu solicitus facilitus nae.
+                        Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui sollicitudin
+                        sollicitudin. In conspectu solicitus facilitus nae. Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt
+                        Curabitur at dui Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui
+                        sollicitudin sollicitudin. In conspectu solicitus facilitus nae.
+                    </div>
+                    <p/>
+                    <input type="button" onclick="guardarUsuario();" value="REGISTRARME"/>
+                </form>
+            </div>
+            <div class="grid_5">
+                <div style="float: left; width: 100%; height: auto; background-color: #CCC; padding: 10px;">
+                    <label style="color: #333; height: auto; font-weight: bold;">Registrate y llevate un bono por ${#$valorBono#}</label>
+                    <hr/>
+                    <label style="color: #999; text-align: justify;">Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui sollicitudin sollicitudin. In conspectu solicitus facilitus nae.</label>
+                </div>
+                <div style="float: left; width: 100%; height: auto; margin-top: 20px;">
+                    <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/ofertaEspecial/{#$ofertaEspecial.imagen#}" width="100%" height="300"/>
+                    <img src="../images/marca.png" style="position: absolute; top: 150px; left: 260;" width="125" height="70"/>
+                </div>
+                <div style="float: left; width: 100%; height: auto; background-color: #CCC; padding: 10px; margin-top: 20px;">
+                    <label style="color: #333; height: auto; font-weight: bold;">Seguridad para el usuario</label>
+                    <hr/>
+                    <label style="color: #999; font-weight: bold;">Curabitur at dui malesuada dui:</label><br/>
+                    <label style="color: #999; text-align: justify;">Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui sollicitudin sollicitudin. In conspectu solicitus facilitus nae.</label><p/>
+                    <label style="color: #999; font-weight: bold;">Curabitur at dui malesuada dui:</label><br/>
+                    <label style="color: #999; text-align: justify;">Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui sollicitudin sollicitudin. In conspectu solicitus facilitus nae.</label><p/>
+                    <label style="color: #999; font-weight: bold;">Curabitur at dui malesuada dui:</label><br/>
+                    <label style="color: #999; text-align: justify;">Nullam dignissim pulvinar sem, in tincidunt diam volutpat a sem, in tincidunt  Curabitur at dui malesuada dui sollicitudin sollicitudin. In conspectu solicitus facilitus nae.</label>
+                </div>
+            </div>
+            {#include file="footer.tpl"#}
+        </div>
+    </body>
+</html>

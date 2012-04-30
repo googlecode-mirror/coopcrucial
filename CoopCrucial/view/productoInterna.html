@@ -1,0 +1,205 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>.: COOPCRUCIAL :.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../css/fluid_grid.css" type="text/css" rel="stylesheet"/>
+        <link href="../css/sylesCroopCrucial.css" type="text/css" rel="stylesheet"/>
+        <link href="../css/rating.css" rel="stylesheet" type="text/css" />
+        <link href="../css/etalage.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="../js/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="../js/funciones.js"></script>
+        <script type="text/javascript" src="../js/jquery.etalage.js"></script>
+        <!--        <script type="text/javascript" src="../js/rating.js"></script>-->
+        <!--Cufon-->
+        <script type="text/javascript" src="../js/cufon-juy.js"></script>
+        <script type="text/javascript" src="../js/Futura_LT_700.font.js"></script>
+        <script type="text/javascript">
+            Cufon.replace('.TitulosMenu');
+            Cufon.replace('#ContenedorOfertaHome #Porcentaje');
+            Cufon.replace('#ContenedorRecomendadosHome #Titulo');
+            Cufon.replace('.ContenedorLinksFooter .Titulos');
+            Cufon.replace('.CajaProductosOferta .Precio');
+            Cufon.replace('.CajaProductosOferta .PrecioOline');
+        </script>
+    </head>
+    <body>
+        <div class="container_12">
+            {#include file="header.tpl"#}
+            <div class="grid_12">
+                <label>Categorias > {#$producto.categoria#} > {#$producto.nombre#}</label>
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            <div class="grid_5">
+                <ul id="etalage">
+                    {#foreach from=$imagenes item="img"#}
+                    <li>
+                        <img class="etalage_thumb_image" src="../91f5167c34c400758115c2a6826ec2e3/recursos/producto/{#$img.idProducto#}/{#$img.nombre#}" style="width:10px; height:10px;">
+                        <img class="etalage_source_image" src="../91f5167c34c400758115c2a6826ec2e3/recursos/producto/{#$img.idProducto#}/{#$img.nombre#}" style="width:10px; height:10px;">
+                    </li>
+                    {#/foreach#}
+                </ul>
+            </div>
+            <div class="grid_7">
+                <div style="float: left; width: 70%; height: auto;">
+                    <label>{#$producto.nombre#}</label><br/>
+                    <hr>
+                    <label>{#$producto.descripcion#}</label><p/>
+                    <label>Garantia: {#$producto.garantia#}</label><p/>
+                    <label>Calificaci&oacute;n clientes: ({#$producto.numeroVotos#} calificaciones)</label>
+                    <!--                    <form name="test" action="productos.php" method="post">
+                                            <input type="hidden" id="calificacion" name="calificacion" value="{#$calificacion#}"/>
+                                            <input type="hidden" name="idProducto" value="{#$idProducto#}"/>
+                                            <input type="hidden" name="accion" value="1"/>
+                                            <div id="rater" class="rater">
+                                                <div id="stars"></div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </form>-->
+                </div>
+                <div style="float: left; width: 30%; height: auto;">
+                    <label style="text-decoration: line-through;">{#$producto.precio#}</label><br/>
+                    <label>Precio: {#$producto.precioWeb#}</label><br/>
+                    <input type="button" onclick="agregarCarritoCantidad('{#$producto.idProducto#}');" value="Agregar al carrito"/>
+                    <input type="button" value="Comprar ahora"/>
+                </div>
+                <div style="float: left; width: 100%; height: auto;">
+                    <p/><hr>
+                    <label>Especificaciones</label>
+                    <select id="cantidad" name="cantidad">
+                        <option value="">Cantidad</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <select name="talla">
+                        <option value="">Talla</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <select name="color">
+                        <option value="">Color</option>
+                        <option value="1" style="background-color: #00c; color: #fff;">Azul</option>
+                        <option value="1" style="background-color: #c00; color: #fff;">Rojo</option>
+                    </select>
+                    <hr>
+                    <div style="float: left; width: 40%; margin-right: 3%;">
+                        <iframe src="https://www.facebook.com/plugins/like.php?href={#$linkRedes#}" scrolling="no" frameborder="0" style="border:none; width:100%; height: 30px;"></iframe>
+                    </div>
+                    <div style="float: left; width: 20%; margin-right: 3%;">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
+                    <div style="float: left; width: 30%;">
+                        <!-- Place this tag where you want the +1 button to render -->
+                        <g:plusone annotation="inline" width="400"></g:plusone>
+                        <!-- Place this render call where appropriate -->
+                        <script type="text/javascript">
+                            window.___gcfg = {lang: 'es-419'};
+
+                            (function() {
+                                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                po.src = 'https://apis.google.com/js/plusone.js';
+                                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                            })();
+                        </script>
+                    </div>
+                </div>
+                <div style="float: left; width: 100%; height: auto;">
+                    <label>Categorias:</label>
+                    <ul style="list-style: none outside none;">
+                        {#foreach from=$categoriasInternas item="c"#}
+                        <li style="float: left;">
+                            <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/{#$c.categoria#}/{#$c.id#}/{#$c.imagen#}" width="50" height="50" onmouseover="toolTip(1,'{#$c.categoria#}{#$c.id#}');" onmouseout="toolTip(2,'{#$c.categoria#}{#$c.id#}');"/>
+                            <div id="tooltip{#$c.categoria#}{#$c.id#}" style="display: none; position: absolute; top: 50px; left: 0px; width: 200px; height: 200px; background-color: #fff; border: 1px solid #000; z-index: 1;">
+                                <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/{#$c.categoria#}/{#$c.id#}/{#$c.imagen#}" width="50" height="50"/><p/>
+                                <strong style="text-transform: uppercase">{#$c.tituloDescripcion#}</strong><p/>
+                                <label style="text-align: justify;">{#$c.descripcion#}</label>
+                            </div>
+                        </li>
+                        {#/foreach#}
+                    </ul>
+                </div>
+            </div>
+            <div class="grid_12" style="height: 252px;">
+                <div style="width: 34%; height: 252px; border: 1px solid #000; float: left;">
+                    {#if $smarty.session.usuario.nombre!=""#}
+                    <h2>{#$smarty.session.usuario.nombreUsuario#}</h2>
+                    <label>Agrega un comentario a este producto</label><br/>
+                    <textarea style="width: 100%; height: 100px;" id="comentario"></textarea>
+                    <input type="button" value="Agregar comentario" onclick="agregarComentario('{#$producto.idProducto#}');"/><br/>
+                    {#else#}
+                    <h2>Agregar comentarios</h2>
+                    <label>Haz conocer tus comentarios a cerca de este producto.</label><br/>
+                    <input type="button" value="Agregar comentario"/><br/>
+                    <a href="javascript:void(0);">Ingresar a su cuenta</a> &oacute; <a href="javascript:void(0);">Registrarse</a>
+                    {#/if#}
+                </div>
+                <div style="width: 64%; height: 252px; border: 1px solid #000; border-left: none; float: left;">
+                    <div style="width: 32%; height: 30px; border-right: 1px solid #000; margin-right: 5px; cursor: pointer; float: left;" onclick="mostrarComentarios();">COMENTARIOS ({#$comentarios.cantidad#})</div>
+                    <div style="width: 32%; height: 30px; border-right: 1px solid #000; border-left: 1px solid #000; margin-right: 5px; cursor: pointer; float: left;" onclick="mostrarEspecificaciones();">ESPECIFICACIONES ({#$especificaciones.cantidad#})</div>
+                    <div style="width: 32%; height: 30px; border-right: 1px solid #000; border-left: 1px solid #000; cursor: pointer; float: left;" onclick="mostrarCaracteristicas();">CARACTER&Iacute;STICAS ({#$caracteristicas.cantidad#})</div>
+                    <div id="divComentarios" style="width: 100%; height: 220px; border-top: 1px solid #000; float: left;">
+                        {#if $comentarios.cantidad == 0#}
+                        <label>Este producto no tiene comentarios relacionados.</label>
+                        {#else#}
+                        <ul>
+                            {#foreach from=$comentarios.comentarios item="c"#}
+                            <li><strong>{#$c.usuario#}</strong><br/>{#$c.comentario#}</li>
+                            {#/foreach#}
+                        </ul>
+                        {#/if#}
+                    </div>
+                    <div id="divEspecificaciones" style="width: 100%; height: 220px; border-top: 1px solid #000; display: none; float: left;">
+                        {#if $especificaciones.cantidad == 0#}
+                        <label>Este producto no tiene especificaciones.</label>
+                        {#else#}
+                        <ul>
+                            {#foreach from=$especificaciones.especificaciones item="e"#}
+                            <li><strong>{#$e.titulo#}</strong><br/>{#$e.descripcion#}</li>
+                            {#/foreach#}
+                        </ul>
+                        {#/if#}
+                    </div>
+                    <div id="divCaracteristicas" style="width: 100%; height: 220px; border-top: 1px solid #000; display: none; float: left;">
+                        {#if $caracteristicas.cantidad == 0#}
+                        <label>Este producto no tiene caracteristicas.</label>
+                        {#else#}
+                        <ul>
+                            {#foreach from=$caracteristicas.caracteristicas item="c"#}
+                            <li><strong>{#$c.nombre#}</strong><br/>{#$c.descripcion#}</li>
+                            {#/foreach#}
+                        </ul>
+                        {#/if#}
+                    </div>
+                </div>
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
+            {#include file="recomendados.tpl"#}
+            {#include file="footer.tpl"#}
+        </div>
+        <script type="text/javascript" language="javascript">
+            $('#etalage').etalage({
+                thumb_image_width: 350,
+                thumb_image_height: 350,
+                source_image_width: 800,
+                source_image_height: 800,
+                zoom_area_width: 550,
+                show_hint: false
+            });
+            /*var pValue = '{#$calificacion#}';
+                var r = new rating('stars', 5,  pValue, true, 'calificacion');*/
+        </script>
+    </body>
+</html>
