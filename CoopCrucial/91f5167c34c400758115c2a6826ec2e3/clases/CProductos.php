@@ -238,6 +238,11 @@ class CProductos {
         }
     }
 
+    //Agrega y retorna los usos de un producto
+    public function agregarUso($uso){
+        return "listo";
+    }
+
     //Especifica imagen producto
     public function obtenerEspecificoImagenProducto() {
         

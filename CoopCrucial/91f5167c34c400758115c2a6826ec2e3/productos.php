@@ -1,5 +1,4 @@
-<?php require_once("clases/funciones.php"); ?>
-<?php
+<?php require_once("clases/funciones.php");
 //Objeto
 $dato = new funciones();
 $dato->obtenerSessionUsuario();

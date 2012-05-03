@@ -66,24 +66,24 @@ $dato->autentificarSessionUsuario();
                         <form action="clases/funciones.php" method="post" id="formularioEnvio" enctype="multipart/form-data">
                             <p/>
                             <label>Nombre</label>
-                            <input type="text" name="nombre" maxlength="200" value="<?php echo $dato->obtenerEspecificoCategoria($_GET['id'], "nombre"); ?>" />
+                            <input type="text" name="nombre" maxlength="200" value="<?php echo $dato->obtenerEspecificoUso($_GET['id'], "nombre"); ?>" />
                             <label>Titulo Descripcion</label>
-                            <input type="text" name="titulo" maxlength="200" value="<?php echo $dato->obtenerEspecificoCategoria($_GET['id'], "tituloDescripcion"); ?>" />
+                            <input type="text" name="titulo" maxlength="200" value="<?php echo $dato->obtenerEspecificoUso($_GET['id'], "tituloDescripcion"); ?>" />
                             <label>Descripcion</label>
-                            <textarea name="descripcion" cols="100" rows="10" style="width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;"><?php echo $dato->obtenerEspecificoCategoria($_GET['id'], "descripcion"); ?></textarea>
+                            <textarea name="descripcion" cols="100" rows="10" style="width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;"><?php echo $dato->obtenerEspecificoUso($_GET['id'], "descripcion"); ?></textarea>
                             <label>Tipo</label>
                             <select name="tipoCategoria">
                                 <option value="">---</option>
-                                <option value="Tipo" selected>Tipo</option>
-                                <option value="Uso">Uso</option>
+                                <option value="Tipo">Tipo</option>
+                                <option value="Uso" selected>Uso</option>
                             </select>
                             <label>Imagen  (Debe tener un tamaño de  280 x 200 px)</label>
                             <input type="file" name="imagen" />
                             <div class="yoxview">
-                                <a class='yoxviewLink' href="recursos/categoria/<?php echo $_GET['id']; ?>/<?php echo $dato->obtenerEspecificoCategoria($_GET['id'], "imagen"); ?>" title="<?php echo $dato->obtenerEspecificoCategoria($_GET['id'], "imagen"); ?>"><?php echo $dato->obtenerEspecificoCategoria($_GET['id'], "imagen"); ?></a>
+                                <a class='yoxviewLink' href="recursos/uso/<?php echo $_GET['id']; ?>/<?php echo $dato->obtenerEspecificoUso($_GET['id'], "imagen"); ?>" title="<?php echo $dato->obtenerEspecificoUso($_GET['id'], "imagen"); ?>"><?php echo $dato->obtenerEspecificoUso($_GET['id'], "imagen"); ?></a>
                             </div>
                             <label style="margin-top: 10px;">Oferta (%)</label>
-                            <input type="text" name="oferta" class="other" maxlength="2" style="width: 50px;" value="<?php echo $dato->obtenerEspecificoCategoria($_GET['id'], "oferta"); ?>" />
+                            <input type="text" name="oferta" class="other" maxlength="2" style="width: 50px;" value="<?php echo $dato->obtenerEspecificoUso($_GET['id'], "oferta"); ?>" />
                             <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" />
                             <input type="hidden" name="opcion" value="7" />
                             <p><input type="submit" class="submit" value="Guardar"/></p>

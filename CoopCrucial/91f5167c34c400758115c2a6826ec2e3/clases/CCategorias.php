@@ -59,7 +59,7 @@ class CCategorias {
                     <td>' . $fila[idUso] . '</td>
                     <td>' . $fila[nombre] . '</td>
                     <td>' . $fila[imagen] . '</td>
-                    <td><a href="categoriasModificar.php?id=' . $fila[idUso] . '">Modificar</a> |
+                    <td><a href="usosModificar.php?id=' . $fila[idUso] . '">Modificar</a> |
                         <a class="btnEliminarElementoLista" title="' . $fila[idUso] . '" name="idUso"  href="uso">Eliminar</a>
                         <input type="hidden" id="carpetaImagenBorrar" value="uso/" />
                     </td></tr>';
@@ -115,6 +115,7 @@ class CCategorias {
         $nombre = htmlspecialchars($_POST['nombre'], ENT_QUOTES);
         $titulo = htmlspecialchars($_POST['titulo'], ENT_QUOTES);
         $descripcion = htmlspecialchars($_POST['descripcion'], ENT_QUOTES);
+        $tipoCategoria = $_POST['tipoCategoria'];
         $imagen = comprobarArchivo("imagen");
         if (isset($_POST['oferta']))
             $oferta = (int) $_POST['oferta'];
@@ -138,10 +139,12 @@ class CCategorias {
                 $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
             }
         } elseif ($tipoCategoria == "Uso") {
-            elimarArchivo("../recursos/uso/$id/", $this->obtenerEspecificoUso($id, "imagen"));
-            $imagen = guardarImagen("../recursos/uso/$id/", "imagen");
-            $sentencia = "UPDATE `uso` SET  `imagen` =  '$imagen' WHERE `uso`.`idUso` =$id;";
-            $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+            if ($imagen != "") {
+                elimarArchivo("../recursos/uso/$id/", $this->obtenerEspecificoUso($id, "imagen"));
+                $imagen = guardarImagen("../recursos/uso/$id/", "imagen");
+                $sentencia = "UPDATE `uso` SET  `imagen` =  '$imagen' WHERE `uso`.`idUso` =$id;";
+                $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+            }
         }
         header('Location: ../categorias.php');
     }

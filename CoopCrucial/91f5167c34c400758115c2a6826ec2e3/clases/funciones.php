@@ -88,6 +88,12 @@ class funciones {
         return $objeto->obtenerEspecificoCategoria($id, $campo);
     }
 
+    //Obtener categoria uso especifica
+    public function obtenerEspecificoUso($id, $campo) {
+        $objeto = new CCategorias();
+        return $objeto->obtenerEspecificoUso($id, $campo);
+    }
+
     /*     * ******************************************************************************************** */
     /*     * ******************************** MODULO PRODUCTOS ****************************** */
     /*     * ******************************************************************************************** */
@@ -134,8 +140,14 @@ class funciones {
         $objeto->obtenerListadoImagenesProducto($idProducto);
     }
 
+    //Agregar y retornar los usos de cierto producto
+    public function agregarUso($uso) {
+        $objeto = new CProductos();
+        return $objeto->agregarUso($uso);
+    }
+
     /*     * ******************************************************************************************** */
-    /*     * ******************************** MODULO IMAGENES HOME ****************************** */
+    /*     * ************************************** MODULO IMAGENES HOME ********************************* */
     /*     * ******************************************************************************************** */
 
     //Obtener listado iamgenes home
@@ -307,6 +319,9 @@ switch ($opcion) {
         break;
     case 15:
         $dato->modificarOfertaEspecial();
+        break;
+    case 16:
+        $dato->agregarUso($_POST['idUso']);
         break;
 }
 ?>

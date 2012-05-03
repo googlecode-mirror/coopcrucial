@@ -27,7 +27,7 @@
             </div>
             <div class="grid_4 ContenedorDestacadosPrincipalesHome" align="right" style="width:345px;">
                 <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/ofertaEspecial/{#$ofertaEspecial.imagen#}" width="100%" height="300"/>
-                <img src="../images/marca.png" style="position: absolute; top: -5px; left: 60%;" width="125" height="70"/>
+                <img src="../images/marca.png" style="position: absolute; top: -5px; left: 60%;" width="143" height="89"/>
             </div>
             <div id="ContenedorOfertaHome" class="grid_12" >
                 <div id="Porcentaje" class="grid_1" >40%</div>
@@ -44,8 +44,8 @@
                 <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/producto/{#$d.idProducto#}/{#$d.imagen#}" width="282" height="200"/>
                 <div>
                     <div class="Titulo">{#$d.nombre#}</div>
-                    <div class="Precio">PRECIO: $80.0000 </div>
-                    <div class="PrecioOline">ON LINE: {#$d.precioWeb#}</div>
+                    <div class="Precio">PRECIO: ${#$d.precio#} </div>
+                    <div class="PrecioOline">ON LINE: ${#$d.precioWeb#}</div>
                     <div class="clear"></div>
                     <table width="270" border="0" cellspacing="0" cellpadding="0">
                         <tr>
@@ -79,8 +79,8 @@
                 {#include file="recomendados.tpl"#}
             </div>
             <div class="grid_12" style="height: 20px;"></div>
-            {#include file="masComprados.tpl"#}
-            <div class="grid_12" style="height: 20px;"></div>
+<!--            {#include file="masComprados.tpl"#}
+            <div class="grid_12" style="height: 20px;"></div>-->
             {#include file="footer.tpl"#}
         </div>
     </body>
