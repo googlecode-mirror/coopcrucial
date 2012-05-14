@@ -249,10 +249,10 @@ function recordarContrasenia($correo) {
     $usuario->addSelect("correoElectronico");
     $usuario->setWhere("correoElectronico = '$correo'");
     $usuario = $usuario->getAll();
-    if (is_array($usuario)) {
+    if (is_array($usuario) && !empty($usuario)) {
         $usuario = $usuario[0];
         $q = sha1($usuario['usuario']);
-        $link = "www.nabica.com.co/usuarios.php?q=$q" . $usuario['idUsuario'];
+        $link = "www.nabica.com.co/clientes/crucial/e-commerce/service/usuarios.php?q=$q" . $usuario['idUsuario'];
         $mensaje = "<div style='text-align: center; float: left;'>
             <h1>" . $usuario['nombre'] . " " . $usuario['apellidos'] . ", gracias por utilizar nuestros servicios</h1>
             <div style='width: 60%; margin-left: 20%;'>
