@@ -74,14 +74,14 @@
         VER CATEGOR&Iacute;AS
     </div>
     <div class="ContenedorBuscador">
-
         <table width="0" border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td> <input id="buscador" class="InputBuscador" type="text" value="{#$palabraClave#}" placeholder="Busca el producto que necesitas"/></td>
-                <td><img src="../imagenes/boton_buscar.png" width="34" height="32" onclick="buscar();"  /></td>
+                <td>
+                    <input id="buscador" class="InputBuscador" type="text" value="{#$palabraClave#}" placeholder="Busca el producto que necesitas" onkeypress="enter(event);"/>
+                </td>
+                <td><img src="../imagenes/boton_buscar.png" width="34" height="32" onclick="buscar();"/></td>
             </tr>
         </table>
-
         <!--<input type="button" value="BUSCAR" onclick="buscar();" style="margin-top: 15px;"/>-->
     </div>
 </div>

@@ -85,6 +85,18 @@ function cargarImagen(idImagenProducto){
     });
 }
 
+function enter(ev){
+    var ascii;
+    if(ev.keyCode)
+        ascii = ev.keyCode;
+    else{
+        if(ev.which)
+            ascii = ev.which;
+    }
+    if (ascii == 13)
+        buscar();
+}
+
 function buscar(){
     var palabraClave = document.getElementById("buscador").value;
     if(palabraClave == "")

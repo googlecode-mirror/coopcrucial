@@ -1,10 +1,8 @@
-<?php require_once("clases/funciones.php"); ?>
-<?php
+<?php require_once("clases/funciones.php");
 //Objeto
 $dato = new funciones();
 $dato->obtenerSessionUsuario();
 $dato->autentificarSessionUsuario();
-
 //include_once("FCKeditor/fckeditor.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +10,6 @@ $dato->autentificarSessionUsuario();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Crear Producto</title>
-
         <!--Estilo-->
         <link type="text/css" rel="stylesheet" href="estilo/admin_css.css" />
         <style type="text/css" >
@@ -42,7 +39,7 @@ $dato->autentificarSessionUsuario();
                     "<label>Nombre</label>"+
                     "<input type='text' name='nombreCaracteristica[]' class='other'/>"+
                     "<label>Descripcion</label>"+
-                    "<input type='text' name='descripcionCaracteristica[]' class='other' style='width: 550px;'/>"+
+                    "<textarea name='descripcionCaracteristica[]'  cols='100' rows='10'  class='other' style='width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;'></textarea>"+
                     "</fieldset><br/>");
                 contCaracteristicas++;
             }
@@ -70,14 +67,11 @@ $dato->autentificarSessionUsuario();
             }
         </script>
     </head>
-
     <body>
         <!-- top lines for style -->
         <div id="top_green"></div>
         <div id="top_dark"></div>
-
         <div id="wrapper">
-
             <div id="header">
                 <div id="logo"></div>
                 <div id="user_links">
@@ -85,22 +79,15 @@ $dato->autentificarSessionUsuario();
                     <a id="btnLogOut" href="#">Logout</a>
                 </div>
             </div>
-
             <!--Menu Navegacion-->
             <?php include_once('menuNavegacion.php'); ?>
             <!--Fin Menu Navegacion-->
-
             <div id="content">
                 <!-- edit sub navigation and quick links here -->
                 <div id="sub_nav">
-                    <ul>
-
-                    </ul>
-
+                    <ul></ul>
                 </div>
-
                 <div id="left">
-
                     <!-- begin all content here -->
                     <h1 class="dashboard">Productos:  Crear producto</h1>
                     <p></p>
@@ -147,9 +134,9 @@ $dato->autentificarSessionUsuario();
                                     <label>Nombre</label>
                                     <input type="text" name="nombreCaracteristica[]" class="other"/>
                                     <label>Descripcion</label>
-                                    <input type="text" name="descripcionCaracteristica[]" class="other" style="width: 550px;"/>
+                                    <textarea name="descripcionCaracteristica[]" cols="100" rows="10" style="width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;"></textarea>
                                 </fieldset><br/>
-                                <a href="javascript:void(0);" onclick="agregarCaracteristica();">Agregar Caracter&iacute;tica</a>
+                                <a href="javascript:void(0);" onclick="agregarCaracteristica();">Agregar Caracter&iacute;stica</a>
                             </div>
                             <label onclick="javascript:$('#divEspecificaciones').slideToggle('slow');" style="cursor: pointer; margin-top: 15px;"><strong>ESPECIFICACIONES</strong></label>
                             <div id="divEspecificaciones" style="display: none;">

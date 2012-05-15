@@ -78,9 +78,9 @@ class CProductos {
         $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
 
         //Usos
-        if (isset($_POST['idUso[]'])) {
+        if (isset($_POST['idUso'])) {
             mysql_select_db($this->database_conn, $this->conn);
-            for ($i = 0; $i < count($_POST['idUso[]']); $i++) {
+            for ($i = 0; $i < count($_POST['idUso']); $i++) {
                 if ($_POST['idUso'][$i] != "") {
                     $idUso = (int) $this->obtenerConsecutivoUsoProducto();
                     $sentencia = "INSERT INTO `uso_producto` (`idUsoProducto`, `idProducto`, `idUso`) VALUES ('$idUso', '" . $id . "', '" . $_POST['idUso'][$i] . "');";
@@ -90,9 +90,9 @@ class CProductos {
         }
 
         //Guarda especificaciones
-        if (isset($_POST['tituloEspecificacion[]']) && isset($_POST['descripcionEspecificacion[]'])) {
+        if (isset($_POST['tituloEspecificacion']) && isset($_POST['descripcionEspecificacion'])) {
             mysql_select_db($this->database_conn, $this->conn);
-            for ($i = 0; $i < count($_POST['tituloEspecificacion[]']); $i++) {
+            for ($i = 0; $i < count($_POST['tituloEspecificacion']); $i++) {
                 if ($_POST['tituloEspecificacion'][$i] != "" && $_POST['descripcionEspecificacion'][$i] != "") {
                     $idEspecificacion = (int) $this->obtenerConsecutivoEspecificacion();
                     $sentencia = "INSERT INTO `especificacion` (`idEspecificacion`, `titulo`, `descripcion`, `idProducto`) VALUES ('$idEspecificacion', '" . htmlspecialchars($_POST['tituloEspecificacion'][$i]) . "', '" . htmlspecialchars($_POST['descripcionEspecificacion'][$i]) . "', '$id');";
@@ -102,9 +102,9 @@ class CProductos {
         }
 
         //Guarda caracteristicas
-        if (isset($_POST['nombreCaracteristica[]']) && isset($_POST['descripcionCaracteristica[]'])) {
+        if (isset($_POST['nombreCaracteristica']) && isset($_POST['descripcionCaracteristica'])) {
             mysql_select_db($this->database_conn, $this->conn);
-            for ($i = 0; $i < count($_POST['nombreCaracteristica[]']); $i++) {
+            for ($i = 0; $i < count($_POST['nombreCaracteristica']); $i++) {
                 if ($_POST['nombreCaracteristica'][$i] != "" && $_POST['descripcionCaracteristica'][$i] != "") {
                     $idCaracteristica = (int) $this->obtenerConsecutivoCaracteristica();
                     $sentencia = "INSERT INTO `caracteristica` (`idCaracteristica`, `nombre`, `descripcion`, `idProducto`) VALUES ('$idCaracteristica', '" . htmlspecialchars($_POST['nombreCaracteristica'][$i]) . "', '" . htmlspecialchars($_POST['descripcionCaracteristica'][$i]) . "', '$id');";
@@ -132,59 +132,85 @@ class CProductos {
 
     //Modificar categoria
     public function modificarProducto() {
-
         $nombre = htmlspecialchars($_POST['nombre'], ENT_QUOTES);
-        $imagen = comprobarArchivo("imagen");
-        //TODO
-        /* $descripcionCorta = htmlspecialchars($_POST['descripcionCorta'], ENT_QUOTES);
-          $descripcionCompleta = htmlspecialchars($_POST['descripcionCompleta'], ENT_QUOTES);
-          $puntos = trim(htmlspecialchars($_POST['puntos'], ENT_QUOTES));
-          $tiempo = htmlspecialchars($_POST['tiempo'], ENT_QUOTES);
-          $mensajeCertificado = htmlspecialchars($_POST['mensajeCertificado'], ENT_QUOTES);
-          $tipTituloVerdadero = htmlspecialchars($_POST['tipTituloVerdadero'], ENT_QUOTES);
-          $tipDescVerdadero = htmlspecialchars($_POST['tipDescVerdadero'], ENT_QUOTES);
-          $tipTituloFalso = htmlspecialchars($_POST['tipTituloFalso'], ENT_QUOTES);
-          $tipDescFalso = htmlspecialchars($_POST['tipDescFalso'], ENT_QUOTES); */
-
-        $id = $_POST['id'];
+        $descripcion = htmlspecialchars($_POST['descripcion'], ENT_QUOTES);
+        $garantia = htmlspecialchars($_POST['garantia'], ENT_QUOTES);
+        $marca = htmlspecialchars($_POST['marca'], ENT_QUOTES);
+        $precio = (int) $_POST['precio'];
+        $precioWeb = (int) $_POST['precioWeb'];
+        $tags = htmlspecialchars($_POST['tags']);
+        if (isset($_POST['destacado']) && $_POST['destacado'] == 1)
+            $destacado = (int) $_POST['destacado'];
+        else
+            $destacado = 0;
+        if (isset($_POST['recomendado']) && $_POST['recomendado'] == 1)
+            $recomendado = (int) $_POST['recomendado'];
+        else
+            $recomendado = 0;
+        $idCategoria = (int) $_POST['idCategoria'];
+        $idProducto = (int) $_POST['idProducto'];
 
         $this->conectar();
-
         mysql_select_db($this->database_conn, $this->conn);
-        $sentencia = "UPDATE `categoria` SET  `nombre` =  '$nombre' WHERE  `categoria`.`idCategoria` =$id;";
-
+        $sentencia = "UPDATE `producto` SET  `nombre` =  '$nombre', `descripcion` = '$descripcion', `garantia` = '$garantia', `marca`='$marca', `precio`='$precio', `precioWeb`='$precioWeb', `tags` = '$tags', `destacado`='$destacado', `recomendado`='$recomendado' WHERE  `producto`.`idProducto` = $idProducto;";
         $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+//        var_dump($this->obtenerImagenesEspecificasProducto($idProducto, "nombre"));
+//        die;
+        /* if ($imagen != "") {
 
+          elimarArchivo("../recursos/categoria/$id/", $this->obtenerEspecificoCategoria($id, "imagen"));
+          $imagen = guardarImagen("../recursos/categoria/$id/", "imagen");
 
-        if ($imagen != "") {
+          mysql_select_db($this->database_conn, $this->conn);
+          $sentencia = "UPDATE `categoria` SET  `imagen` =  '$imagen' WHERE  `categoria`.`idCategoria` =$id;";
 
-            elimarArchivo("../recursos/categoria/$id/", $this->obtenerEspecificoCategoria($id, "imagen"));
-            $imagen = guardarImagen("../recursos/categoria/$id/", "imagen");
+          $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+          } */
 
+        //Guarda nuevas imagenes
+        if (comprobarArchivos("imagenes")) {
+            $imagenes = guardarImagenes("../recursos/producto/$idProducto/", "imagenes");
+            //Redimensionar imagen
+            //$imagen2 = redimensionarImagen(103,108,"../recursos/noticias/$id/$imagen","../recursos/noticias/$id/pequena","pequena");
             mysql_select_db($this->database_conn, $this->conn);
-            $sentencia = "UPDATE `categoria` SET  `imagen` =  '$imagen' WHERE  `categoria`.`idCategoria` =$id;";
-
-            $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+            foreach ($imagenes as $img) {
+                $idImagenProducto = $this->obtenerConsecutivoImagenProducto();
+                $sentencia = "INSERT INTO `imagen_producto` (`idImagenProducto`, `nombre`, `idProducto`) VALUES ('$idImagenProducto', '$img', '$idProducto');";
+                $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+            }
         }
-        header('Location: ../categorias.php');
+        header('Location: ../productos.php');
     }
 
-    //Obtener especifico ecurso
+    //Obtener especifico producto
     public function obtenerEspecificoProducto($id, $campo) {
-
         $this->conectar();
-
         $id = (int) $id;
-
         mysql_select_db($this->database_conn, $this->conn);
         $sentencia = "SELECT * FROM `producto` WHERE idProducto = $id";
-
         $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
         $numFilas = mysql_num_rows($resultado);
         $fila = mysql_fetch_assoc($resultado);
-
         if ($numFilas > 0) {
             return $fila[$campo];
+        }
+    }
+
+    //Obtener imagen especifica producto
+    public function obtenerImagenesEspecificasProducto($id, $campo) {
+        $this->conectar();
+        $id = (int) $id;
+        mysql_select_db($this->database_conn, $this->conn);
+        $sentencia = "SELECT * FROM `imagen_producto` WHERE idImagenProducto = $id";
+        $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+        $numFilas = mysql_num_rows($resultado);
+        $fila = mysql_fetch_assoc($resultado);
+        $imagenes = array();
+        if ($numFilas > 0) {
+            do {
+                $imagenes[$fila['idImagenProducto']] = $fila['nombre'];
+            } while ($fila = mysql_fetch_assoc($resultado));
+            return $imagenes;
         }
     }
 
@@ -231,15 +257,71 @@ class CProductos {
                 echo"<label>Imagen 1</label>
                      <input type='file' name='imagenes[]' />
                      <div class='yoxview'>
-                        <a class='yoxviewLink' href='recursos/producto/" . $fila['idImagenProducto'] . "/" . $fila['nombre'] . " title='" . $fila['idImagenProducto'] . "'>" . $fila['nombre'] . "</a>
+                        <a class='yoxviewLink' href='recursos/producto/" . $idProducto . "/" . $fila['nombre'] . "' title='" . $fila['idImagenProducto'] . "'>" . $fila['nombre'] . "</a>
+                        <a href='javascript:void(0);' onclick='eliminarImagenProducto(" . $idProducto . "," . $fila['idImagenProducto'] . ");'>Eliminar</a>
                      </div><br/>";
                 //TODO metodos imagen
             } while ($fila = mysql_fetch_assoc($resultado));
         }
     }
 
+    //Eliminar una imagen del producto
+    public function eliminarImagenProducto($p, $i) {
+        $this->conectar();
+        mysql_select_db($this->database_conn, $this->conn);
+        $sentencia = "DELETE FROM `imagen_producto` WHERE `idImagenProducto`='$i'";
+        $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+        return elimarArchivo("../recursos/productos/$p/", $this->obtenerImagenesEspecificasProducto($i, "nombre"));
+    }
+
+    //Obtener listado caracteristicas de producto
+    public function obtenerListadoCaracteristicasProducto($idProducto) {
+        $this->conectar();
+        mysql_select_db($this->database_conn, $this->conn);
+        $sentencia = "SELECT * FROM `caracteristica` WHERE `idProducto`='$idProducto' ORDER BY idCaracteristica ASC";
+        $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+        $numFilas = mysql_num_rows($resultado);
+        $fila = mysql_fetch_assoc($resultado);
+        if ($numFilas > 0) {
+            do {
+                echo"<fieldset>
+                        <legend>Caracteristica 1</legend>
+                        <label>Nombre</label>
+                        <input type='text' name='nombreCaracteristica[]' class='other' value='" . $fila['nombre'] . "'/>
+                        <label>Descripcion</label>
+                        <textarea name='descripcionCaracteristica[]' cols='100' rows='10' class='other' style='width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;'>" . $fila['descripcion'] . "</textarea>
+                            <a href='javascript:void(0);'>Eliminar</a>
+                     </fieldset><br/>";
+                //TODO metodos caracteristicas
+            } while ($fila = mysql_fetch_assoc($resultado));
+        }
+    }
+
+    //Obtener listado especificaciones de producto
+    public function obtenerListadoEspecificacionesProducto($idProducto) {
+        $this->conectar();
+        mysql_select_db($this->database_conn, $this->conn);
+        $sentencia = "SELECT * FROM `especificacion` WHERE `idProducto`='$idProducto' ORDER BY idEspecificacion ASC";
+        $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+        $numFilas = mysql_num_rows($resultado);
+        $fila = mysql_fetch_assoc($resultado);
+        if ($numFilas > 0) {
+            do {
+                echo"<fieldset>
+                        <legend>Especificacion 1</legend>
+                        <label>Titulo</label>
+                        <input type='text' name='tituloEspecificacion[]' class='other' value='" . $fila['titulo'] . "'/>
+                        <label>Descripcion</label>
+                        <textarea name='descripcionEspecificacion[]' cols='100' rows='10' style='width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;'>" . $fila['descripcion'] . "</textarea>
+                            <a href='javascript:void(0);'>Eliminar</a>
+                     </fieldset><br/>";
+                //TODO metodos especificaciones
+            } while ($fila = mysql_fetch_assoc($resultado));
+        }
+    }
+
     //Agrega y retorna los usos de un producto
-    public function agregarUso($uso){
+    public function agregarUso($uso) {
         return "listo";
     }
 
