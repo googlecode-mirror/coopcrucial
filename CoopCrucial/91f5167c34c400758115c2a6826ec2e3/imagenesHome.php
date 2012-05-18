@@ -47,6 +47,7 @@ $dato->autentificarSessionUsuario();
                     <ul>
                         <li><a href="imagenesHome.php">Imagenes Home</a></li>
                         <li><a href="ofertasEspeciales.php">Ofertas Especiales</a></li>
+                        <li><a href="barraHorizontal.php">Barra Horizontal</a></li>
                     </ul>
                 </div>
                 <div id="left">

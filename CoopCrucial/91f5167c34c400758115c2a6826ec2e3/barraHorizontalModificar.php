@@ -1,5 +1,4 @@
-<?php require_once("clases/funciones.php"); ?>
-<?php
+<?php require_once("clases/funciones.php");
 //Objeto
 $dato = new funciones();
 $dato->obtenerSessionUsuario();
@@ -11,7 +10,7 @@ $dato->autentificarSessionUsuario();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Crear Imagen Home</title>
+        <title>Modificar Barra Horizontal</title>
 
         <!--Estilo-->
         <link type="text/css" rel="stylesheet" href="estilo/admin_css.css" />
@@ -53,15 +52,23 @@ $dato->autentificarSessionUsuario();
                 </div>
                 <div id="left">
                     <!-- begin all content here -->
-                    <h1 class="dashboard">Imagenes:  Crear imagen</h1>
+                    <h1 class="dashboard">Destacado Horizontal: Modificar Barra Horizontal</h1>
                     <p></p>
                     <div class="div_header">Form Fields</div>
                     <div class="div_content">
                         <form action="clases/funciones.php" method="post" id="formularioEnvio" enctype="multipart/form-data">
                             <p/>
-                            <label>Imagen  (Debe tener un tamaño de  571 x 250 px)</label>
-                            <input type="file" name="imagen" />
-                            <input type="hidden" name="opcion" value="10" />
+                            <label>Porcentaje</label>
+                            <input type="text" name="porcentaje" class="other" maxlength="2" value="<?php echo $dato->obtenerEspecificoBarraHorizontal($_GET['id'], "porcentaje"); ?>" />
+                            <label>Titulo</label>
+                            <input type="text" name="titulo" class="other" maxlength="50" value="<?php echo $dato->obtenerEspecificoBarraHorizontal($_GET['id'], "titulo"); ?>" />
+                            <label>Descripcion</label>
+                            <textarea name="descripcion" class="other"><?php echo $dato->obtenerEspecificoBarraHorizontal($_GET['id'], "descripcion"); ?> </textarea>
+                            <label>Mostrado</label>
+                            <input type="radio" name="mostrado" class="other" value="1" <?php if($dato->obtenerEspecificoBarraHorizontal($_GET['id'], "mostrado") == 1) echo "checked"; ?> />Si&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="mostrado" class="other" value="0" <?php if($dato->obtenerEspecificoBarraHorizontal($_GET['id'], "mostrado") == 0) echo "checked"; ?>/>No
+                            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" />
+                            <input type="hidden" name="opcion" value="19" />
                             <p><input type="submit" class="submit" value="Guardar"/></p>
                         </form>
                     </div>
@@ -73,7 +80,7 @@ $dato->autentificarSessionUsuario();
                     <div class="sidebar_header"></div>
                     <div class="sidebar_content">
                         <ul>
-                            <li><a href="imagenesHome.php">Consultar Imagenes Home</a></li>
+                            <li><a href="barraHorizontal.php">Consultar Barra Horizontal</a></li>
                         </ul>
                     </div>
                 </div>

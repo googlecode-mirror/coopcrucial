@@ -178,13 +178,13 @@ CREATE  TABLE IF NOT EXISTS `coopcrucial`.`color_producto` (
   CONSTRAINT `fk_producto_has_color_producto1`
     FOREIGN KEY (`idProducto` )
     REFERENCES `coopcrucial`.`producto` (`idProducto` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_producto_has_color_color1`
     FOREIGN KEY (`idColor` )
     REFERENCES `coopcrucial`.`color` (`idColor` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -228,8 +228,8 @@ CREATE  TABLE IF NOT EXISTS `coopcrucial`.`ciudad` (
   CONSTRAINT `fk_ciudad_pais1`
     FOREIGN KEY (`idPais` )
     REFERENCES `coopcrucial`.`pais` (`idPais` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -251,13 +251,13 @@ CREATE  TABLE IF NOT EXISTS `coopcrucial`.`direccion` (
   CONSTRAINT `fk_direccion_usuario1`
     FOREIGN KEY (`idUsuario` )
     REFERENCES `coopcrucial`.`usuario` (`idUsuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_direccion_ciudad1`
     FOREIGN KEY (`idCiudad` )
     REFERENCES `coopcrucial`.`ciudad` (`idCiudad` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -281,18 +281,18 @@ CREATE  TABLE IF NOT EXISTS `coopcrucial`.`venta` (
   CONSTRAINT `fk_producto_has_usuario_producto1`
     FOREIGN KEY (`idProducto` )
     REFERENCES `coopcrucial`.`producto` (`idProducto` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_producto_has_usuario_usuario1`
     FOREIGN KEY (`idUsuario` )
     REFERENCES `coopcrucial`.`usuario` (`idUsuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_venta_direccion1`
     FOREIGN KEY (`idDireccion` )
     REFERENCES `coopcrucial`.`direccion` (`idDireccion` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -313,8 +313,8 @@ CREATE  TABLE IF NOT EXISTS `coopcrucial`.`comentario` (
   CONSTRAINT `fk_usuario_has_producto_usuario1`
     FOREIGN KEY (`idUsuario` )
     REFERENCES `coopcrucial`.`usuario` (`idUsuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_usuario_has_producto_producto1`
     FOREIGN KEY (`idProducto` )
     REFERENCES `coopcrucial`.`producto` (`idProducto` )
@@ -379,13 +379,13 @@ CREATE  TABLE IF NOT EXISTS `coopcrucial`.`uso_producto` (
   CONSTRAINT `fk_producto_has_uso_producto1`
     FOREIGN KEY (`idProducto` )
     REFERENCES `coopcrucial`.`producto` (`idProducto` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_producto_has_uso_uso1`
     FOREIGN KEY (`idUso` )
     REFERENCES `coopcrucial`.`uso` (`idUso` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -416,13 +416,28 @@ CREATE  TABLE IF NOT EXISTS `coopcrucial`.`preferencia_usuario` (
   CONSTRAINT `fk_usuario_has_preferencia_usuario1`
     FOREIGN KEY (`idUsuario` )
     REFERENCES `coopcrucial`.`usuario` (`idUsuario` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_usuario_has_preferencia_preferencia1`
     FOREIGN KEY (`idPreferencia` )
     REFERENCES `coopcrucial`.`preferencia` (`idPreferencia` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `coopcrucial`.`barra_horizontal`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `coopcrucial`.`barra_horizontal` ;
+
+CREATE  TABLE IF NOT EXISTS `coopcrucial`.`barra_horizontal` (
+  `idBarraHorizontal` INT NOT NULL AUTO_INCREMENT ,
+  `porcentaje` INT NOT NULL ,
+  `titulo` VARCHAR(50) NOT NULL ,
+  `descripcion` VARCHAR(150) NOT NULL ,
+  `mostrado` TINYINT(1) NOT NULL DEFAULT 0 ,
+  PRIMARY KEY (`idBarraHorizontal`) )
 ENGINE = InnoDB;
 
 

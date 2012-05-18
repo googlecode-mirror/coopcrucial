@@ -9,7 +9,7 @@ $dato->autentificarSessionUsuario();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Imagenes Home</title>
+        <title>Barra Horizontal</title>
 
         <!--Estilo-->
         <link type="text/css" rel="stylesheet" href="estilo/admin_css.css" />
@@ -52,7 +52,7 @@ $dato->autentificarSessionUsuario();
                 </div>
                 <div id="left">
                     <!-- begin all content here -->
-                    <h1 class="dashboard">Ofertas Especiales: Listado de ofertas</h1>
+                    <h1 class="dashboard">Barra Horizontal</h1>
                     <p></p>
                     <div class="div_header">&nbsp;</div>
                     <div class="div_content">
@@ -60,11 +60,14 @@ $dato->autentificarSessionUsuario();
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
-                                    <th scope="col">Imagen</th>
-                                    <th scope="col">Acciones</th></tr>
+                                    <th scope="col">Porcentaje</th>
+                                    <th scope="col">Titulo</th>
+                                    <th scope="col">Mostrado</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
                             </thead>
                             <tbody class="ui-sortable">
-                                <?php $dato->obtenerListadoOfertasEspeciales(); ?>
+                                <?php $dato->obtenerListadoBarraHorizontal(); ?>
                             </tbody>
                         </table>
                         <p>
@@ -82,8 +85,7 @@ $dato->autentificarSessionUsuario();
                     <div class="sidebar_header"></div>
                     <div class="sidebar_content">
                         <ul>
-                            <li><a href="ofertasEspecialesCrear.php">Nueva Oferta Especial </a></li>
-
+                            <li><a href="barraHorizontalCrear.php">Nueva Barra Horizontal </a></li>
                         </ul>
                     </div>
 

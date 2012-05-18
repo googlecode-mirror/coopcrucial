@@ -5,6 +5,7 @@ require_once('CCategorias.php');
 require_once('CProductos.php');
 require_once('CImagenHome.php');
 require_once('COfertaEspecial.php');
+require_once('CBarraHorizontal.php');
 require_once('CRegistros.php');
 require_once('CEliminacionRegistros.php');
 require_once('colaborativas.php');
@@ -180,32 +181,8 @@ class funciones {
         $objeto->crearImagenHome();
     }
 
-    //Modificar producto
-    /*public function modificarProducto() {
-        $objeto = new CProductos();
-        $objeto->modificarProducto();
-    }
-
-    //Obtener categoria especifica
-    public function obtenerEspecificoProducto($id, $campo) {
-        $objeto = new CProductos();
-        return $objeto->obtenerEspecificoProducto($id, $campo);
-    }
-
-    //Obtener listado categorias-productos
-    public function obtenerListadoCategoriasProducto() {
-        $objeto = new CProductos();
-        $objeto->obtenerListadoCategoriasProducto();
-    }
-
-    //Obtener listado imagenes-productos
-    public function obtenerListadoImagenesProducto($idProducto) {
-        $objeto = new CProductos();
-        $objeto->obtenerListadoImagenesProducto($idProducto);
-    }*/
-
     /*     * ******************************************************************************************** */
-    /*     * ******************************** MODULO IMAGENES HOME ****************************** */
+    /*     * ******************************** MODULO OFERTAS ESPECIALES ****************************** */
     /*     * ******************************************************************************************** */
 
     //Obtener listado ofertas especiales
@@ -220,29 +197,33 @@ class funciones {
         $objeto->crearOfertaEspecial();
     }
 
-    //Modificar producto
-    /*public function modificarProducto() {
-        $objeto = new CProductos();
-        $objeto->modificarProducto();
+        /*     * ******************************************************************************************** */
+    /*     * ******************************** MODULO BARRA HORIZONTAL ****************************** */
+    /*     * ******************************************************************************************** */
+
+    //Obtener listado barra horizontal
+    public function obtenerListadoBarraHorizontal() {
+        $objeto = new CBarraHorizontal();
+        $objeto->obtenerListadoBarraHorizontal();
     }
 
-    //Obtener categoria especifica
-    public function obtenerEspecificoProducto($id, $campo) {
-        $objeto = new CProductos();
-        return $objeto->obtenerEspecificoProducto($id, $campo);
+    //Crear barra horizontal
+    public function crearBarraHorizontal() {
+        $objeto = new CBarraHorizontal();
+        $objeto->crearBarraHorizontal();
     }
 
-    //Obtener listado categorias-productos
-    public function obtenerListadoCategoriasProducto() {
-        $objeto = new CProductos();
-        $objeto->obtenerListadoCategoriasProducto();
+    //Modificar barra horizontal
+    public function modificarBarraHorizontal() {
+        $objeto = new CBarraHorizontal();
+        $objeto->modificarBarraHorizontal();
     }
 
-    //Obtener listado imagenes-productos
-    public function obtenerListadoImagenesProducto($idProducto) {
-        $objeto = new CProductos();
-        $objeto->obtenerListadoImagenesProducto($idProducto);
-    }*/
+    //Obtener especifico barra horizontal
+    public function obtenerEspecificoBarraHorizontal($id, $campo) {
+        $objeto = new CBarraHorizontal();
+        return $objeto->obtenerEspecificoBarraHorizontal($id, $campo);
+    }
 
     /*     * ******************************************************************************************** */
     /*     * ******************************** MODULO REGISTROS ****************************** */
@@ -343,6 +324,12 @@ switch ($opcion) {
         break;
     case 17:
         $dato->eliminarImagenProducto($_POST['p'],$_POST['i']);
+        break;
+    case 18:
+        $dato->crearBarraHorizontal();
+        break;
+    case 19:
+        $dato->modificarBarraHorizontal();
         break;
 }
 ?>

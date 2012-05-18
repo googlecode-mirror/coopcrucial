@@ -46,13 +46,12 @@ $dato->autentificarSessionUsuario();
                 <!-- edit sub navigation and quick links here -->
                 <div id="sub_nav">
                     <ul>
-
+                        <li><a href="imagenesHome.php">Imagenes Home</a></li>
+                        <li><a href="ofertasEspeciales.php">Ofertas Especiales</a></li>
+                        <li><a href="barraHorizontal.php">Barra Horizontal</a></li>
                     </ul>
-
                 </div>
-
                 <div id="left">
-
                     <!-- begin all content here -->
                     <h1 class="dashboard">Ofertas Especiales: Crear oferta</h1>
                     <p></p>

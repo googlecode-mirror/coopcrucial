@@ -38,4 +38,12 @@ function consultarValorBono(){
     return $valor['valor'];
 }
 
+function consultarBarraHorizontal(){
+    $mdb2 = conectar();
+    $valor = new BarraHorizontal($mdb2['dsn']);
+    $valor->setLimit(0, 1);
+    $valor = $valor->getAll();
+    return $valor[0];
+}
+
 ?>

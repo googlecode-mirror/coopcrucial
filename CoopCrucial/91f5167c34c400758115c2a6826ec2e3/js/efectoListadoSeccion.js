@@ -20,7 +20,6 @@ function eliminarItemBaseDatos(){
                 data: "opcion=5&tabla="+ tabla + "&id=" + idElemento + "&carpetaImagenBorrar=" + carpetaImagenBorrar+"&nameId="+nameId,
                 success: function(msg){
 
-                    //alert(msg)
                     switch(tabla){
                         case "categoria":
                             document.location.href="categorias.php";
@@ -28,7 +27,21 @@ function eliminarItemBaseDatos(){
                         case "producto":
                             document.location.href="productos.php";
                             break;
+                        case "oferta_especial":
+                            document.location.href="ofertasEspeciales.php";
+                            break;
+                        case "imagen_home":
+                            document.location.href="imagenesHome.php";
+                            break;
+                        case "barra_horizontal":
+                            document.location.href="barraHorizontal.php";
+                            break;
+                        default:
+                            document.location.href="inicio.php";
+                            break;
+
                     }
+                //alert(msg);
                 }
             });
         }

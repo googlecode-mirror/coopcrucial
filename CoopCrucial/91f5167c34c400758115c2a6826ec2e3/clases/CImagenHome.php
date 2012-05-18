@@ -41,8 +41,7 @@ class CImagenHome {
                 echo '<tr>
                     <td>' . $fila[idImagenHome] . '</td>
                     <td>' . $fila[imagen] . '</td>
-                    <td><a href="imagenesHomeModificar.php?id=' . $fila[idImagenHome] . '">Modificar</a> |
-                        <a class="btnEliminarElementoLista" title="' . $fila[idImagenHome] . '" name="idImagenHome"  href="imagen_home">Eliminar</a>
+                    <td><a class="btnEliminarElementoLista" title="' . $fila[idImagenHome] . '" name="idImagenHome"  href="imagen_home">Eliminar</a>
                         <input type="hidden" id="carpetaImagenBorrar" value="imagen_home/" />
                     </td></tr>';
             } while ($fila = mysql_fetch_assoc($resultado));

@@ -31,6 +31,8 @@ INSERT INTO `imagen_home` (`idImagenHome`, `imagen`) VALUES (2, 'destacado1.jpg'
 #Destacado Ofertas especiales
 INSERT INTO `oferta_especial` (`idOfertaEspecial`, `imagen`) VALUES (1, 'oferta.jpg');
 INSERT INTO `oferta_especial` (`idOfertaEspecial`, `imagen`) VALUES (2, 'oferta1.jpg');
+#Barra Horizontal
+INSERT INTO `barra_horizontal` (`idBarraHorizontal`, `porcentaje`, `titulo`, `descripcion`, `mostrado`) VALUES (1, '40', 'Extintores en Oferta', 'Por el mes de Vacaciones, encuentra todos nuestros productos de PISCINAS y KITS de viaje con descuentos de hasta el 40%', 1);
 #Usuarios
 INSERT INTO `usuario` VALUES (1, 'Julian', 'NuÃ±ez', 'CC', '1018413448', '1987/09/28', 'julian.nunezm@gmail.com', '3163013298', 0, 0, 'COOP123', 'julian', '7c4a8d09ca3762af61e59520943dc26494f8941b');
 #Direcciones

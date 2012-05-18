@@ -28,18 +28,17 @@ class CEliminacionRegistros {
         $id = $_POST['id'];
         $nameId = $_POST['nameId'];
         $carpetaImagenBorrar = $_POST['carpetaImagenBorrar'];
-
+        //Elimnar Registro
         $this->conectar();
+        mysql_select_db($this->database_conn, $this->conn);
+        $sentencia = "DELETE FROM `$tabla` WHERE $nameId = $id";
+        $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
         //Si existe carpeta con imagenes
         if ($carpetaImagenBorrar != "") {
             //echo $msg = "$carpetaImagenBorrar".$id;
             //Eliminar carpeta
             eliminarRecursivoContenidoDeDirectorio("../recursos/$carpetaImagenBorrar" . $id . "/");
         }
-        //Elimnar Registro
-        mysql_select_db($this->database_conn, $this->conn);
-        $sentencia = "DELETE FROM `$tabla` WHERE $nameId = $id";
-        $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
     }
 
 }

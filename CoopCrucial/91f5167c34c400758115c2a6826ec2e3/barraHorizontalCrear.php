@@ -1,5 +1,4 @@
-<?php require_once("clases/funciones.php"); ?>
-<?php
+<?php require_once("clases/funciones.php");
 //Objeto
 $dato = new funciones();
 $dato->obtenerSessionUsuario();
@@ -11,7 +10,7 @@ $dato->autentificarSessionUsuario();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Crear Imagen Home</title>
+        <title>Crear Barra Horizontal</title>
 
         <!--Estilo-->
         <link type="text/css" rel="stylesheet" href="estilo/admin_css.css" />
@@ -53,15 +52,22 @@ $dato->autentificarSessionUsuario();
                 </div>
                 <div id="left">
                     <!-- begin all content here -->
-                    <h1 class="dashboard">Imagenes:  Crear imagen</h1>
+                    <h1 class="dashboard">Destacado Horizontal: Crear Barra Horizontal</h1>
                     <p></p>
                     <div class="div_header">Form Fields</div>
                     <div class="div_content">
                         <form action="clases/funciones.php" method="post" id="formularioEnvio" enctype="multipart/form-data">
                             <p/>
-                            <label>Imagen  (Debe tener un tamaño de  571 x 250 px)</label>
-                            <input type="file" name="imagen" />
-                            <input type="hidden" name="opcion" value="10" />
+                            <label>Porcentaje</label>
+                            <input type="text" name="porcentaje" class="other" maxlength="2"  />
+                            <label>Titulo</label>
+                            <input type="text" name="titulo" class="other" maxlength="50"  />
+                            <label>Descripcion</label>
+                            <textarea name="descripcion" class="other"></textarea>
+                            <label>Mostrado</label>
+                            <input type="radio" name="mostrado" class="other" value="1" checked />Si&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="mostrado" class="other" value="0"/>No
+                            <input type="hidden" name="opcion" value="18" />
                             <p><input type="submit" class="submit" value="Guardar"/></p>
                         </form>
                     </div>

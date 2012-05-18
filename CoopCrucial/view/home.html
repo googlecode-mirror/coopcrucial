@@ -29,15 +29,16 @@
                 <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/ofertaEspecial/{#$ofertaEspecial.imagen#}" width="100%" height="300"/>
                 <img src="../images/marca.png" style="position: absolute; top: -5px; left: 60%;" width="143" height="89"/>
             </div>
+            {#if $barraHorizontal.mostrado == 1#}
             <div id="ContenedorOfertaHome" class="grid_12" >
-                <div id="Porcentaje" class="grid_1" >40%</div>
+                <div id="Porcentaje" class="grid_1" >{#$barraHorizontal.porcentaje#}%</div>
                 <div id="Decripcion" class="grid_11" style="color: #fff; width:706px;">
-                    <div id="Titulo">Extintores en Oferta</div>
-                    <div id="Texto"> Por el mes de Vacaciones, encuentra todos nuestros productos de PISCINAS y KITS de viaje con descuentos de hasta el 40%
-                    </div>
+                    <div id="Titulo">{#$barraHorizontal.titulo#}</div>
+                    <div id="Texto">{#$barraHorizontal.descripcion#}</div>
                 </div>
                 <div id="ContenedorBotonVeOferta"></div>
             </div>
+            {#/if#}
             <div class="grid_12 " style="height: 20px;"></div>
             {#foreach from=$destacados item="d"#}
             <div class="CajaProductosOferta">

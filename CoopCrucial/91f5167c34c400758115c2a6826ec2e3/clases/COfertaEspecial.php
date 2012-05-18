@@ -41,8 +41,7 @@ class COfertaEspecial {
                 echo '<tr>
                     <td>' . $fila[idOfertaEspecial] . '</td>
                     <td>' . $fila[imagen] . '</td>
-                    <td><a href="ofertasEspecialesModificar.php?id=' . $fila[idOfertaEspecial] . '">Modificar</a> |
-                        <a class="btnEliminarElementoLista" title="' . $fila[idOfertaEspecial] . '" name="idOfertaEspecial"  href="oferta_especial">Eliminar</a>
+                    <td><a class="btnEliminarElementoLista" title="' . $fila[idOfertaEspecial] . '" name="idOfertaEspecial"  href="oferta_especial">Eliminar</a>
                         <input type="hidden" id="carpetaImagenBorrar" value="oferta_especial/" />
                     </td></tr>';
             } while ($fila = mysql_fetch_assoc($resultado));
