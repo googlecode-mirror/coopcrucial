@@ -31,6 +31,7 @@ define('TABLA_COLOR_PRODUCTO', 'color_producto');
 define('TABLA_COLOR', 'color');
 define('TABLA_IMAGEN_HOME','imagen_home');
 define('TABLA_IMAGEN_OFERTA_ESPECIAL','oferta_especial');
+define('TABLA_IMAGEN_DESTACADO','imagen_destacado');
 define('TABLA_BARRA_HORIZONTAL','barra_horizontal');
 define('TABLA_USUARIO','usuario');
 define('TABLA_PREFERENCIA_USUARIO','preferencia_usuario');
@@ -95,6 +96,11 @@ class ImagenHome extends MDB_QueryToolExt {
 class OfertaEspecial extends MDB_QueryToolExt {
     var $table = TABLA_IMAGEN_OFERTA_ESPECIAL;
     var $primaryCol = 'idOfertaEspecial';
+}
+
+class ImagenDestacado extends MDB_QueryToolExt {
+    var $table = TABLA_IMAGEN_DESTACADO;
+    var $primaryCol = 'idImagenDestacado';
 }
 
 class BarraHorizontal extends MDB_QueryToolExt {

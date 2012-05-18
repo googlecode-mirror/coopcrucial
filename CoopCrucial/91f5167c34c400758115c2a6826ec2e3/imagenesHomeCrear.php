@@ -48,6 +48,7 @@ $dato->autentificarSessionUsuario();
                     <ul>
                         <li><a href="imagenesHome.php">Imagenes Home</a></li>
                         <li><a href="ofertasEspeciales.php">Ofertas Especiales</a></li>
+                        <li><a href="imagenDestacado.php">Imagen Destacado</a></li>
                         <li><a href="barraHorizontal.php">Barra Horizontal</a></li>
                     </ul>
                 </div>
@@ -61,6 +62,8 @@ $dato->autentificarSessionUsuario();
                             <p/>
                             <label>Imagen  (Debe tener un tamaño de  571 x 250 px)</label>
                             <input type="file" name="imagen" />
+                            <label>Url a redireccionar</label>
+                            <input type="text" name="url" class="other" maxlength="50" />
                             <input type="hidden" name="opcion" value="10" />
                             <p><input type="submit" class="submit" value="Guardar"/></p>
                         </form>

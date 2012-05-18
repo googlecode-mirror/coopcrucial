@@ -10,6 +10,7 @@ $smarty->assign("carrito", consultarCarrito());
 $smarty->assign("imagenHome", consultarImagenHome());
 $smarty->assign("ofertaEspecial", consultarOfertaEspecial());
 $smarty->assign("barraHorizontal", consultarBarraHorizontal());
+$smarty->assign("imagenDestacado", consultarImagenDestacado());
 $smarty->assign("destacados", consultarProductosDestacados());
 $smarty->assign("recomendados", consultarProductosRecomendados());
 $smarty->assign("masComprados", consultarProductosMasComprados());

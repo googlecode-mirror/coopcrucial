@@ -36,6 +36,9 @@ function eliminarItemBaseDatos(){
                         case "barra_horizontal":
                             document.location.href="barraHorizontal.php";
                             break;
+                        case "imagen_destacado":
+                            document.location.href="imagenDestacado.php";
+                            break;
                         default:
                             document.location.href="inicio.php";
                             break;

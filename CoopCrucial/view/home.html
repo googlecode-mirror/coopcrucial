@@ -22,11 +22,15 @@
     <body>
         <div class="container_12">
             {#include file="header.tpl"#}
-            <div class="grid_8 ContenedorDestacadosPrincipalesHome" style="width:571px;" >
-                <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/imagenHome/{#$imagenHome.imagen#}" width="571" height="300"/>
+            <div class="grid_8 ContenedorDestacadosPrincipalesHome" style="width:571px;">
+                <a href="http://{#$imagenHome.url#}" target="n_blank">
+                    <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/imagenHome/{#$imagenHome.imagen#}" width="571" height="300"/>
+                </a>
             </div>
             <div class="grid_4 ContenedorDestacadosPrincipalesHome" align="right" style="width:345px;">
-                <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/ofertaEspecial/{#$ofertaEspecial.imagen#}" width="100%" height="300"/>
+                <a href="http://{#$ofertaEspecial.url#}" target="n_blank">
+                    <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/ofertaEspecial/{#$ofertaEspecial.imagen#}" width="100%" height="300"/>
+                </a>
                 <img src="../images/marca.png" style="position: absolute; top: -5px; left: 60%;" width="143" height="89"/>
             </div>
             {#if $barraHorizontal.mostrado == 1#}
@@ -73,15 +77,17 @@
             </div>
             {#/if#}
             <div class="grid_4">
-                <img src="../images/ciudad.png" width="100%" height="200"/>
+                <a href="http://{#$imagenDestacado.url#}" target="n_blank">
+                    <img src="../91f5167c34c400758115c2a6826ec2e3/recursos/imagenDestacado/{#$imagenDestacado.imagen#}" width="100%" height="200"/>
+                </a>
             </div>
             <div class="grid_12" style="height: 20px;"></div>
             <div id="ContenedorRecomendadosHome" class="grid_12" style="">
                 {#include file="recomendados.tpl"#}
             </div>
             <div class="grid_12" style="height: 20px;"></div>
-<!--            {#include file="masComprados.tpl"#}
-            <div class="grid_12" style="height: 20px;"></div>-->
+            <!--            {#include file="masComprados.tpl"#}
+                        <div class="grid_12" style="height: 20px;"></div>-->
             {#include file="footer.tpl"#}
         </div>
     </body>

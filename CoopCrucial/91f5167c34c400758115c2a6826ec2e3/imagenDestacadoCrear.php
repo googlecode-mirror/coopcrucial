@@ -10,7 +10,7 @@ $dato->autentificarSessionUsuario();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Crear Oferta Especial</title>
+        <title>Crear Imagen Destacado</title>
 
         <!--Estilo-->
         <link type="text/css" rel="stylesheet" href="estilo/admin_css.css" />
@@ -53,17 +53,17 @@ $dato->autentificarSessionUsuario();
                 </div>
                 <div id="left">
                     <!-- begin all content here -->
-                    <h1 class="dashboard">Ofertas Especiales: Crear oferta</h1>
+                    <h1 class="dashboard">Imagenes: Crear imagen</h1>
                     <p></p>
                     <div class="div_header">Form Fields</div>
                     <div class="div_content">
                         <form action="clases/funciones.php" method="post" id="formularioEnvio" enctype="multipart/form-data">
                             <p/>
-                            <label>Imagen  (Debe tener un tamaño de  360 x 250 px)</label>
+                            <label>Imagen  (Debe tener un tamaño de  300 x 200 px)</label>
                             <input type="file" name="imagen" />
                             <label>Url a redireccionar</label>
                             <input type="text" name="url" class="other" maxlength="50" />
-                            <input type="hidden" name="opcion" value="14" />
+                            <input type="hidden" name="opcion" value="20" />
                             <p><input type="submit" class="submit" value="Guardar"/></p>
                         </form>
                     </div>
@@ -75,7 +75,7 @@ $dato->autentificarSessionUsuario();
                     <div class="sidebar_header"></div>
                     <div class="sidebar_content">
                         <ul>
-                            <li><a href="ofertasEspeciales.php">Consultar Ofertas Especiales</a></li>
+                            <li><a href="imagenesHome.php">Consultar Imagenes Home</a></li>
                         </ul>
                     </div>
                 </div>

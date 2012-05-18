@@ -5,6 +5,7 @@ require_once('CCategorias.php');
 require_once('CProductos.php');
 require_once('CImagenHome.php');
 require_once('COfertaEspecial.php');
+require_once('CImagenDestacado.php');
 require_once('CBarraHorizontal.php');
 require_once('CRegistros.php');
 require_once('CEliminacionRegistros.php');
@@ -197,6 +198,22 @@ class funciones {
         $objeto->crearOfertaEspecial();
     }
 
+    /*     * ******************************************************************************************** */
+    /*     * ************************************** MODULO IMAGEN DESTACADO ********************************* */
+    /*     * ******************************************************************************************** */
+
+    //Obtener listado imagen destacado
+    public function obtenerListadoImagenDestacado() {
+        $objeto = new CImagenDestacado();
+        $objeto->obtenerListadoImagenDestacado();
+    }
+
+    //Crear imagen destacado
+    public function crearImagenDestacado() {
+        $objeto = new CImagenDestacado();
+        $objeto->crearImagenDestacado();
+    }
+
         /*     * ******************************************************************************************** */
     /*     * ******************************** MODULO BARRA HORIZONTAL ****************************** */
     /*     * ******************************************************************************************** */
@@ -330,6 +347,9 @@ switch ($opcion) {
         break;
     case 19:
         $dato->modificarBarraHorizontal();
+        break;
+    case 20:
+        $dato->crearImagenDestacado();
         break;
 }
 ?>

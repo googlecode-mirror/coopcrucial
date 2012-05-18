@@ -13,7 +13,7 @@ $phpFile = $phpFile[$i];
             echo"<li class='current'><a href='productos.php'>Productos</a></li>";
         else
             echo"<li><a href='productos.php'>Productos</a></li>";
-        if($phpFile=="imagenesHome.php" || $phpFile=="ofertasEspeciales.php" || $phpFile=="barraHorizontal.php")
+        if($phpFile=="imagenesHome.php" || $phpFile=="ofertasEspeciales.php" || $phpFile=="barraHorizontal.php" || $phpFile == "imagenDestacado.php")
             echo"<li class='current'><a href='imagenesHome.php'>Destacados</a></li>";
         else
             echo"<li><a href='imagenesHome.php'>Destacados</a></li>";

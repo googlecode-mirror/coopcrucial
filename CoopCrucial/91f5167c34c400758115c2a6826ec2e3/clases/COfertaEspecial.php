@@ -41,6 +41,7 @@ class COfertaEspecial {
                 echo '<tr>
                     <td>' . $fila[idOfertaEspecial] . '</td>
                     <td>' . $fila[imagen] . '</td>
+                    <td>' . $fila[url] . '</td>
                     <td><a class="btnEliminarElementoLista" title="' . $fila[idOfertaEspecial] . '" name="idOfertaEspecial"  href="oferta_especial">Eliminar</a>
                         <input type="hidden" id="carpetaImagenBorrar" value="oferta_especial/" />
                     </td></tr>';
@@ -50,14 +51,14 @@ class COfertaEspecial {
 
     //Crear Oferta Especial
     public function crearOfertaEspecial() {
-
         $imagen = comprobarArchivo("imagen");
+        $url = htmlspecialchars($_POST['url'], ENT_QUOTES);
         $id = $this->obtenerConsecutivoOfertaEspecial();
         if ($imagen != "") {
             $this->conectar();
             $imagen = guardarImagen("../recursos/ofertaEspecial/", "imagen");
             mysql_select_db($this->database_conn, $this->conn);
-            $sentencia = "INSERT INTO `oferta_especial` (`idOfertaEspecial`, `imagen`) VALUES ('$id', '$imagen');";
+            $sentencia = "INSERT INTO `oferta_especial` (`idOfertaEspecial`, `imagen`, `url`) VALUES ('$id', '$imagen', '$url');";
             $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
         }
         header('Location: ../ofertasEspeciales.php');

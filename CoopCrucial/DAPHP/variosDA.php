@@ -40,10 +40,18 @@ function consultarValorBono(){
 
 function consultarBarraHorizontal(){
     $mdb2 = conectar();
-    $valor = new BarraHorizontal($mdb2['dsn']);
-    $valor->setLimit(0, 1);
-    $valor = $valor->getAll();
-    return $valor[0];
+    $barra = new BarraHorizontal($mdb2['dsn']);
+    $barra->setLimit(0, 1);
+    $barra = $barra->getAll();
+    return $barra[0];
+}
+
+function consultarImagenDestacado(){
+    $mdb2 = conectar();
+    $destacado = new ImagenDestacado($mdb2['dsn']);
+    $destacado->setLimit(0, 1);
+    $destacado = $destacado->getAll();
+    return $destacado[0];
 }
 
 ?>

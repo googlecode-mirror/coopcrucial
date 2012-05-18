@@ -41,6 +41,7 @@ class CImagenHome {
                 echo '<tr>
                     <td>' . $fila[idImagenHome] . '</td>
                     <td>' . $fila[imagen] . '</td>
+                    <td>' . $fila[url] . '</td>
                     <td><a class="btnEliminarElementoLista" title="' . $fila[idImagenHome] . '" name="idImagenHome"  href="imagen_home">Eliminar</a>
                         <input type="hidden" id="carpetaImagenBorrar" value="imagen_home/" />
                     </td></tr>';
@@ -50,14 +51,14 @@ class CImagenHome {
 
     //Crear Imagen Home
     public function crearImagenHome() {
-
         $imagen = comprobarArchivo("imagen");
+        $url = htmlspecialchars($_POST['url'], ENT_QUOTES);
         $id = $this->obtenerConsecutivoImagenHome();
         if ($imagen != "") {
             $this->conectar();
             $imagen = guardarImagen("../recursos/imagenHome/", "imagen");
             mysql_select_db($this->database_conn, $this->conn);
-            $sentencia = "INSERT INTO `imagen_home` (`idImagenHome`, `imagen`) VALUES ('$id', '$imagen');";
+            $sentencia = "INSERT INTO `imagen_home` (`idImagenHome`, `imagen`, `url`) VALUES ('$id', '$imagen', '$url');";
             $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
         }
         header('Location: ../imagenesHome.php');
@@ -66,7 +67,7 @@ class CImagenHome {
     //Modificar categoria
     public function modificarCategoria() {
 
-        $nombre = htmlspecialchars($_POST['nombre'], ENT_QUOTES);
+        $url = htmlspecialchars($_POST['url'], ENT_QUOTES);
         $imagen = comprobarArchivo("imagen");
         if (isset($_POST['oferta']))
             $oferta = (int) $_POST['oferta'];

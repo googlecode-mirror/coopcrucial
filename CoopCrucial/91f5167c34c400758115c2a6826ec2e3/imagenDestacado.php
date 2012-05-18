@@ -1,5 +1,4 @@
-<?php require_once("clases/funciones.php"); ?>
-<?php
+<?php require_once("clases/funciones.php");
 //Objeto
 $dato = new funciones();
 $dato->obtenerSessionUsuario();
@@ -9,7 +8,7 @@ $dato->autentificarSessionUsuario();
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Barra Horizontal</title>
+        <title>Imagen Destacado</title>
 
         <!--Estilo-->
         <link type="text/css" rel="stylesheet" href="estilo/admin_css.css" />
@@ -53,7 +52,7 @@ $dato->autentificarSessionUsuario();
                 </div>
                 <div id="left">
                     <!-- begin all content here -->
-                    <h1 class="dashboard">Barra Horizontal</h1>
+                    <h1 class="dashboard">Imagen Destacado: Listado de imagenes</h1>
                     <p></p>
                     <div class="div_header">&nbsp;</div>
                     <div class="div_content">
@@ -61,14 +60,12 @@ $dato->autentificarSessionUsuario();
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
-                                    <th scope="col">Porcentaje</th>
-                                    <th scope="col">Titulo</th>
-                                    <th scope="col">Mostrado</th>
-                                    <th scope="col">Acciones</th>
-                                </tr>
+                                    <th scope="col">Imagen</th>
+                                    <th scope="col">Url</th>
+                                    <th scope="col">Acciones</th></tr>
                             </thead>
                             <tbody class="ui-sortable">
-                                <?php $dato->obtenerListadoBarraHorizontal(); ?>
+                                <?php $dato->obtenerListadoImagenDestacado(); ?>
                             </tbody>
                         </table>
                         <p>
@@ -86,7 +83,8 @@ $dato->autentificarSessionUsuario();
                     <div class="sidebar_header"></div>
                     <div class="sidebar_content">
                         <ul>
-                            <li><a href="barraHorizontalCrear.php">Nueva Barra Horizontal </a></li>
+                            <li><a href="imagenDestacadoCrear.php">Nueva Imagen Destacado </a></li>
+
                         </ul>
                     </div>
 

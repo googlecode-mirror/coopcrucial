@@ -144,8 +144,7 @@ DROP TABLE IF EXISTS `coopcrucial`.`imagen_destacado` ;
 CREATE  TABLE IF NOT EXISTS `coopcrucial`.`imagen_destacado` (
   `idImagenDestacado` INT NOT NULL AUTO_INCREMENT ,
   `imagen` VARCHAR(45) NOT NULL ,
-  `link` VARCHAR(50) NOT NULL ,
-  `nombre` VARCHAR(50) NOT NULL ,
+  `url` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`idImagenDestacado`) )
 ENGINE = InnoDB;
 
@@ -196,6 +195,7 @@ DROP TABLE IF EXISTS `coopcrucial`.`imagen_home` ;
 CREATE  TABLE IF NOT EXISTS `coopcrucial`.`imagen_home` (
   `idImagenHome` INT NOT NULL AUTO_INCREMENT ,
   `imagen` VARCHAR(45) NOT NULL ,
+  `url` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`idImagenHome`) )
 ENGINE = InnoDB;
 
@@ -344,6 +344,7 @@ DROP TABLE IF EXISTS `coopcrucial`.`oferta_especial` ;
 CREATE  TABLE IF NOT EXISTS `coopcrucial`.`oferta_especial` (
   `idOfertaEspecial` INT NOT NULL AUTO_INCREMENT ,
   `imagen` VARCHAR(45) NOT NULL ,
+  `url` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`idOfertaEspecial`) )
 ENGINE = InnoDB;
 

@@ -26,11 +26,13 @@ INSERT INTO `caracteristica` (`idCaracteristica`, `nombre`, `descripcion`, `idPr
 INSERT INTO `imagen_producto` (`idImagenProducto`, `nombre`, `idProducto`) VALUES (3, 'botiquin.jpg', 2);
 INSERT INTO `imagen_producto` (`idImagenProducto`, `nombre`, `idProducto`) VALUES (4, 'botiquin2.jpg', 2);
 #Destacado Imagenes Home
-INSERT INTO `imagen_home` (`idImagenHome`, `imagen`) VALUES (1, 'destacado.jpg');
-INSERT INTO `imagen_home` (`idImagenHome`, `imagen`) VALUES (2, 'destacado1.jpg');
+INSERT INTO `imagen_home` (`idImagenHome`, `imagen`, `url`) VALUES (1, 'destacado.jpg', 'www.google.com');
+INSERT INTO `imagen_home` (`idImagenHome`, `imagen`, `url`) VALUES (2, 'destacado1.jpg', 'www.eltiempo.com');
 #Destacado Ofertas especiales
-INSERT INTO `oferta_especial` (`idOfertaEspecial`, `imagen`) VALUES (1, 'oferta.jpg');
-INSERT INTO `oferta_especial` (`idOfertaEspecial`, `imagen`) VALUES (2, 'oferta1.jpg');
+INSERT INTO `oferta_especial` (`idOfertaEspecial`, `imagen`, `url`) VALUES (1, 'oferta.jpg', 'www.google.com');
+INSERT INTO `oferta_especial` (`idOfertaEspecial`, `imagen`, `url`) VALUES (2, 'oferta1.jpg', 'www.eltiempo.com');
+#Destacado Imagen Destacado
+INSERT INTO `imagen_destacado` (`idImagenDestacado`, `imagen`, `url`) VALUES (1, 'sol.jpg', 'www.elespectador.com');
 #Barra Horizontal
 INSERT INTO `barra_horizontal` (`idBarraHorizontal`, `porcentaje`, `titulo`, `descripcion`, `mostrado`) VALUES (1, '40', 'Extintores en Oferta', 'Por el mes de Vacaciones, encuentra todos nuestros productos de PISCINAS y KITS de viaje con descuentos de hasta el 40%', 1);
 #Usuarios
