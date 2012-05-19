@@ -290,13 +290,21 @@ class CProductos {
                         <input type='text' name='nombreCaracteristica[]' class='other' value='" . $fila['nombre'] . "'/>
                         <label>Descripcion</label>
                         <textarea name='descripcionCaracteristica[]' cols='100' rows='10' class='other' style='width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;'>" . $fila['descripcion'] . "</textarea>
-                            <a href='javascript:void(0);'>Eliminar</a>
+                            <a href='javascript:void(0);' onclick='eliminarCaracteristica(" . $idProducto . "," . $fila['idCaracteristica'] . ");'>Eliminar</a>
                      </fieldset><br/>";
                 //TODO metodos caracteristicas
             } while ($fila = mysql_fetch_assoc($resultado));
         }
     }
 
+    //Eliminar una caracteristica del producto
+    public function eliminarCaracteristica($p, $c) {
+        $this->conectar();
+        mysql_select_db($this->database_conn, $this->conn);
+        $sentencia = "DELETE FROM `caracteristica` WHERE `idCaracteristica`='$c'";
+        $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
+    }
+    
     //Obtener listado especificaciones de producto
     public function obtenerListadoEspecificacionesProducto($idProducto) {
         $this->conectar();
@@ -313,11 +321,19 @@ class CProductos {
                         <input type='text' name='tituloEspecificacion[]' class='other' value='" . $fila['titulo'] . "'/>
                         <label>Descripcion</label>
                         <textarea name='descripcionEspecificacion[]' cols='100' rows='10' style='width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;'>" . $fila['descripcion'] . "</textarea>
-                            <a href='javascript:void(0);'>Eliminar</a>
+                            <a href='javascript:void(0);' onclick='eliminarEspecificacion(" . $idProducto . "," . $fila['idEspecificacion'] . ");'>Eliminar</a>
                      </fieldset><br/>";
                 //TODO metodos especificaciones
             } while ($fila = mysql_fetch_assoc($resultado));
         }
+    }
+
+    //Eliminar una especificacion del producto
+    public function eliminarEspecificacion($p, $e) {
+        $this->conectar();
+        mysql_select_db($this->database_conn, $this->conn);
+        $sentencia = "DELETE FROM `especificacion` WHERE `idEspecificacion`='$e'";
+        $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
     }
 
     //Agrega y retorna los usos de un producto

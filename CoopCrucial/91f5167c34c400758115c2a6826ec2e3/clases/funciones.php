@@ -157,13 +157,25 @@ class funciones {
     //Agregar y retornar los usos de cierto producto
     public function agregarUso($uso) {
         $objeto = new CProductos();
-        return $objeto->agregarUso($uso);
+        echo $objeto->agregarUso($uso);
     }
 
     //Elimina la imagen de un producto
     public function eliminarImagenProducto($p,$i){
         $objeto = new CProductos();
         return $objeto->eliminarImagenProducto($p, $i);
+    }
+
+    //Elimina la caracteristica de un producto
+    public function eliminarCaracteristica($p,$c){
+        $objeto = new CProductos();
+        $objeto->eliminarCaracteristica($p, $c);
+    }
+
+    //Elimina la especificacion de un producto
+    public function eliminarEspecificacion($p,$e){
+        $objeto = new CProductos();
+        $objeto->eliminarEspecificacion($p, $e);
     }
 
     /*     * ******************************************************************************************** */
@@ -350,6 +362,12 @@ switch ($opcion) {
         break;
     case 20:
         $dato->crearImagenDestacado();
+        break;
+    case 21:
+        $dato->eliminarCaracteristica($_POST['p'],$_POST['c']);
+        break;
+    case 22:
+        $dato->eliminarEspecificacion($_POST['p'],$_POST['e']);
         break;
 }
 ?>

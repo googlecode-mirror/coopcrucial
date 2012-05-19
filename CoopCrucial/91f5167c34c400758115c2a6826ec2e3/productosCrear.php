@@ -1,4 +1,5 @@
-<?php require_once("clases/funciones.php");
+<?php
+require_once("clases/funciones.php");
 //Objeto
 $dato = new funciones();
 $dato->obtenerSessionUsuario();
@@ -59,9 +60,10 @@ $dato->autentificarSessionUsuario();
                     $.ajax({
                         type: "POST",
                         url: "clases/funciones.php",
-                        data: "opcion=16&idUso="+$("#usosSelect").val()
-                    }).done(function( msg ) {
-                        document.getElementById("divUsos").innerHTML=msg;
+                        data: "opcion=16&idUso="+$("#usosSelect").val(),
+                        success: function(data){
+                            document.getElementById("divUsos").innerHTML=data;
+                        }
                     });
                 }
             }
@@ -80,7 +82,7 @@ $dato->autentificarSessionUsuario();
                 </div>
             </div>
             <!--Menu Navegacion-->
-            <?php include_once('menuNavegacion.php'); ?>
+<?php include_once('menuNavegacion.php'); ?>
             <!--Fin Menu Navegacion-->
             <div id="content">
                 <!-- edit sub navigation and quick links here -->
@@ -113,12 +115,12 @@ $dato->autentificarSessionUsuario();
                             <label>Categoria</label>
                             <select name="idCategoria" style="width: auto;">
                                 <option value="">---</option>
-                                <?php $dato->obtenerListadoCategoriasProducto(); ?>
+<?php $dato->obtenerListadoCategoriasProducto(); ?>
                             </select>
                             <label>Usos</label>
                             <select id="usosSelect" name="idUso[]" style="width: auto;">
                                 <option value="">---</option>
-                                <?php $dato->obtenerListadoUsosProducto(); ?>
+<?php $dato->obtenerListadoUsosProducto(); ?>
                             </select><a href="javascript:void(0);" onclick="agregarUso();">Agregar</a>
                             <div id="divUsos" style="width: 150px; height: 100px; border: 1px solid #000;"></div>
                             <label onclick="javascript:$('#divImagenes').slideToggle('slow');" style="cursor: pointer;"><strong>IMAGENES</strong> (Deben tener un tamaño de 280 x 200 px)</label>
@@ -172,7 +174,7 @@ $dato->autentificarSessionUsuario();
                 <!-- Fin Menu navegacion derecho -->
             </div>
             <!--Menu Footer-->
-            <?php include_once('footer.php'); ?>
+<?php include_once('footer.php'); ?>
             <!--Fin Menu Footer-->
         </div>
     </body>

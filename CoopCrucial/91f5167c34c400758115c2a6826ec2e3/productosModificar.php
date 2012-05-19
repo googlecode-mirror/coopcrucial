@@ -63,20 +63,48 @@ $dato->autentificarSessionUsuario();
                     $.ajax({
                         type: "POST",
                         url: "clases/funciones.php",
-                        data: "opcion=16&idUso="+$("#usosSelect").val()
-                    }).done(function( msg ) {
-                        document.getElementById("divUsos").innerHTML=msg;
+                        data: "opcion=16&idUso="+$("#usosSelect").val(),
+                        success: function(data){
+                            document.getElementById("divUsos").innerHTML=data;
+                        }
                     });
                 }
             }
             function eliminarImagenProducto(p,i){
-                $.ajax({
-                    type: "POST",
-                    url: "clases/funciones.php",
-                    data: "opcion=17&p="+p+"&i="+i
-                }).done(function( msg ) {
-                    location.reload;
-                });
+                if(confirm("Esta seguro que desea eliminar esta imagen?")){
+                    $.ajax({
+                        type: "POST",
+                        url: "clases/funciones.php",
+                        data: "opcion=17&p="+p+"&i="+i,
+                        success: function(){
+                            location.reload();
+                        }
+                    });
+                }
+            }
+            function eliminarCaracteristica(p,c){
+                if(confirm("Esta seguro que desea eliminar esta caracteristica?")){
+                    $.ajax({
+                        type: "POST",
+                        url: "clases/funciones.php",
+                        data: "opcion=21&p="+p+"&c="+c,
+                        success: function(){
+                            location.reload();
+                        }
+                    });
+                }
+            }
+            function eliminarEspecificacion(p,e){
+                if(confirm("Esta seguro que desea eliminar esta especificacion?")){
+                    $.ajax({
+                        type: "POST",
+                        url: "clases/funciones.php",
+                        data: "opcion=22&p="+p+"&e="+e,
+                        success: function(){
+                            location.reload();
+                        }
+                    });
+                }
             }
         </script>
     </head>
@@ -93,7 +121,7 @@ $dato->autentificarSessionUsuario();
                 </div>
             </div>
             <!--Menu Navegacion-->
-<?php include_once('menuNavegacion.php'); ?>
+            <?php include_once('menuNavegacion.php'); ?>
             <!--Fin Menu Navegacion-->
             <div id="content">
                 <!-- edit sub navigation and quick links here -->
@@ -122,36 +150,36 @@ $dato->autentificarSessionUsuario();
                             <label>Tags</label>
                             <input type="text" name="tags" class="other" maxlength="50" value="<?php echo $dato->obtenerEspecificoProducto($_GET['id'], "tags"); ?>" />
                             <label>Destacado&nbsp;<input type="checkbox" name="destacado" class="other" value="1" <?php if ($dato->obtenerEspecificoProducto($_GET['id'], "destacado") == 1)
-    echo"checked"; ?>/></label>
+                echo"checked"; ?>/></label>
                             <label>Recomendado&nbsp;<input type="checkbox" name="recomendado" class="other" value="1" <?php if ($dato->obtenerEspecificoProducto($_GET['id'], "recomendado") == 1)
-    echo"checked"; ?> /></label>
+                                                             echo"checked"; ?> /></label>
                             <label>Categoria</label>
                             <select name="idCategoria" style="width: auto;">
                                 <option value="">---</option>
-<?php $dato->obtenerListadoCategoriasProducto(); ?>
-                            </select>
-                            <label>Usos</label>
-                            <select id="usosSelect" name="idUso[]" style="width: auto;">
-                                <option value="">---</option>
-<?php $dato->obtenerListadoUsosProducto(); ?>
-                            </select><a href="javascript:void(0);" onclick="agregarUso();">Agregar</a>
-                            <div id="divUsos" style="width: 150px; height: 100px; border: 1px solid #000;"></div>
-                            <label onclick="javascript:$('#divImagenes').slideToggle('slow');" style="cursor: pointer;"><strong>IMAGENES</strong> (Deben tener un tamaño de 280 x 200 px)</label>
-                            <div id="divImagenes" style="display: none;">
-<?php $dato->obtenerListadoImagenesProducto($_GET['id']); ?>
-                                <a href="javascript:void(0);" onclick="agregarImagen();">Agregar Imagen</a>
-                            </div>
-                            <label onclick="javascript:$('#divCaracteristicas').slideToggle('slow');" style="cursor: pointer; margin-top: 15px;"><strong>CARACTERISTICAS</strong></label>
-                            <div id="divCaracteristicas" style="display: none;">
-<?php $dato->obtenerListadoCaracteristicasProducto($_GET['id']); ?>
-                                <a href="javascript:void(0);" onclick="agregarCaracteristica();">Agregar Caracter&iacute;stica</a>
-                            </div>
-                            <label onclick="javascript:$('#divEspecificaciones').slideToggle('slow');" style="cursor: pointer; margin-top: 15px;"><strong>ESPECIFICACIONES</strong></label>
-                            <div id="divEspecificaciones" style="display: none;">
-<?php $dato->obtenerListadoEspecificacionesProducto($_GET['id']); ?>
-                                <a href="javascript:void(0);" onclick="agregarEspecificacion();">Agregar Especificaci&oacute;n</a>
-                            </div>
-                            <input type="hidden" name="idProducto" value="<?php echo $_GET['id']; ?>" />
+                                <?php $dato->obtenerListadoCategoriasProducto(); ?>
+                                                     </select>
+                                                     <label>Usos</label>
+                                                     <select id="usosSelect" name="idUso[]" style="width: auto;">
+                                                         <option value="">---</option>
+                                <?php $dato->obtenerListadoUsosProducto(); ?>
+                                                     </select><a href="javascript:void(0);" onclick="agregarUso();">Agregar</a>
+                                                     <div id="divUsos" style="width: 150px; height: 100px; border: 1px solid #000;"></div>
+                                                     <label onclick="javascript:$('#divImagenes').slideToggle('slow');" style="cursor: pointer;"><strong>IMAGENES</strong> (Deben tener un tamaño de 280 x 200 px)</label>
+                                                     <div id="divImagenes" style="display: none;">
+                                <?php $dato->obtenerListadoImagenesProducto($_GET['id']); ?>
+                                                         <a href="javascript:void(0);" onclick="agregarImagen();">Agregar Imagen</a>
+                                                     </div>
+                                                     <label onclick="javascript:$('#divCaracteristicas').slideToggle('slow');" style="cursor: pointer; margin-top: 15px;"><strong>CARACTERISTICAS</strong></label>
+                                                     <div id="divCaracteristicas" style="display: none;">
+                                <?php $dato->obtenerListadoCaracteristicasProducto($_GET['id']); ?>
+                                                         <a href="javascript:void(0);" onclick="agregarCaracteristica();">Agregar Caracter&iacute;stica</a>
+                                                     </div>
+                                                     <label onclick="javascript:$('#divEspecificaciones').slideToggle('slow');" style="cursor: pointer; margin-top: 15px;"><strong>ESPECIFICACIONES</strong></label>
+                                                     <div id="divEspecificaciones" style="display: none;">
+                                <?php $dato->obtenerListadoEspecificacionesProducto($_GET['id']); ?>
+                                                         <a href="javascript:void(0);" onclick="agregarEspecificacion();">Agregar Especificaci&oacute;n</a>
+                                                     </div>
+                                                     <input type="hidden" name="idProducto" value="<?php echo $_GET['id']; ?>" />
                             <input type="hidden" name="opcion" value="9" />
                             <p><input type="submit" class="submit" value="Guardar"/></p>
                         </form>
