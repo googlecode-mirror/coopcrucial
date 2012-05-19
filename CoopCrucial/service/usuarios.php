@@ -4,6 +4,7 @@ session_start();
 
 require_once '../util/smarty.php';
 require_once '../DAPHP/usuarioDA.php';
+require_once '../DAPHP/productoDA.php';
 require_once '../DAPHP/imagenDA.php';
 require_once '../DAPHP/variosDA.php';
 
@@ -111,6 +112,7 @@ if (isset($q) && $q != "") {
                         header("Location:../service");
                     else {
                         $error_captcha = null;
+                        $smarty->assign("carrito", consultarCarrito());
                         $smarty->assign("correo", $correo);
                         $smarty->assign("error", "No se pudo enviar el correo.");
                         $smarty->assign("captcha_html", recaptcha_get_html($publickey, $error_captcha));
@@ -121,6 +123,7 @@ if (isset($q) && $q != "") {
                     if (isset($correo) && $correo != "")
                         $smarty->assign("correo", $correo);
                     $smarty->assign("error", $resp->error);
+                    $smarty->assign("carrito", consultarCarrito());
                     $smarty->assign("captcha_html", recaptcha_get_html($publickey, $error_captcha));
                     $smarty->display("recordar.html");
                 }
@@ -128,6 +131,7 @@ if (isset($q) && $q != "") {
                 $error_captcha = null;
                 if (isset($correo) && $correo != "")
                     $smarty->assign("correo", $correo);
+                $smarty->assign("carrito", consultarCarrito());
                 $smarty->assign("captcha_html", recaptcha_get_html($publickey, $error_captcha));
                 $smarty->display("recordar.html");
             }
@@ -138,6 +142,7 @@ if (isset($q) && $q != "") {
                 if (is_array($resp)) {
                     $smarty->assign("paises", consultarPaises());
                     $smarty->assign("usuario", $resp[0]);
+                    $smarty->assign("carrito", consultarCarrito());
                     $dir = cargarDirecciones();
                     $smarty->assign("direccion", $dir['direccion']);
                     $smarty->assign("direcciones", $dir['direcciones']);

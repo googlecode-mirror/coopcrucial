@@ -62,9 +62,13 @@
     </div>
 </div>
 <div id="ContenedorBotonesNecesitaAyuda"class="grid_12" align="right">
+    {#if $smarty.session.usuario.nombre==""#}
     <a href="javascript:void(0);" onclick="recordar();">Recordar tu contrase&ntilde;a</a> |
-    <a href="javascript:void(0);">¿Necesitas ayuda?</a>{#if $smarty.session.usuario.nombre==""#} |
-    <a href="javascript:void(0);" onclick="registrarUsuario();">Reg&iacute;strate ahora</a>{#/if#}
+    {#/if#}
+    <a href="javascript:void(0);">¿Necesitas ayuda?</a>
+    {#if $smarty.session.usuario.nombre==""#} |
+    <a href="javascript:void(0);" onclick="registrarUsuario();">Reg&iacute;strate ahora</a>
+    {#/if#}
 </div>
 <div id="ContenedorMenu" class="grid_12">
     <div class="TitulosMenu" onclick="cargarCategorias(2);">

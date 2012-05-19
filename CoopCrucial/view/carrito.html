@@ -32,7 +32,9 @@
                         <th>Precio</th>
                         <tr>
                             <td>
-                                <input type="text" name="cantidades[]" value="{#$producto.cantidad#}" style="width: 50px;"/>
+                                <a href="javascript:void(0);" onclick="restarCantidad('{#$producto.idProducto#}');" style="text-decoration: none;"><</a>
+                                <input type="text" id="producto{#$producto.idProducto#}" name="cantidades[]" value="{#$producto.cantidad#}" style="width: 30px; text-align: center;"/>
+                                <a href="javascript:void(0);" onclick="sumarCantidad('{#$producto.idProducto#}');" style="text-decoration: none;">></a>
                                 <input type="hidden" name="idsVentas[]" value="{#$producto.idVenta#}"/><br/>
                                 <a href="javascript:void(0);" onclick="eliminarRegistro({#$producto.idProducto#});">Eliminar</a>
                             </td>
@@ -72,8 +74,10 @@
             </div>
             <div class="grid_12" style="height: 20px;"></div>
             <div class="grid_12">
-                {#include file="recomendados.tpl"#}
-                {#include file="masComprados.tpl"#}
+                <div id="ContenedorRecomendadosHome" class="grid_12" style="">
+                    {#include file="recomendados.tpl"#}
+                </div>
+                <!--                {#include file="masComprados.tpl"#}-->
             </div>
             <div class="grid_12" style="height: 20px;"></div>
             {#include file="footer.tpl"#}

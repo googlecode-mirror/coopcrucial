@@ -67,7 +67,9 @@
                     {#foreach from=$productos item="p"#}
                     <tr>
                         <td>
-                            <input type="text" name="cantidades[]" value="{#$p.cantidad#}" style="width: 50px;"/>
+                            <a href="javascript:void(0);" onclick="restarCantidad('{#$p.idProducto#}');" style="text-decoration: none;"><</a>
+                            <input type="text" id="producto{#$p.idProducto#}" name="cantidades[]" value="{#$p.cantidad#}" style="width: 30px; text-align: center;"/>
+                            <a href="javascript:void(0);" onclick="sumarCantidad('{#$p.idProducto#}');" style="text-decoration: none;">></a>
                             <input type="hidden" name="idsVentas[]" value="{#$p.idVenta#}"/><br/>
                             <a href="javascript:void(0);" onclick="eliminarRegistro({#$p.idProducto#});">Eliminar</a>
                         </td>
@@ -129,7 +131,7 @@
                         <label><strong>Direcci&oacute;n Principal</strong></label><br/>
                         <label><strong>Tel&eacute;fono:</strong> {#$d.telefono#}</label><br/>
                         <label><strong>Direcci&oacute;n:</strong> {#$d.direccion#}</label><br/>
-                        <input type="radio" name="direccion" onclick="cargarDireccion('#$d.idDireccion#');"/>Direcci&oacute;n para esta entrega
+                        <input type="radio" name="direccion" value="{#$d.idDireccion#}" onclick="cargarDireccion('#$d.idDireccion#');" {#if $smarty.foreach.dir.iteration == 1#}checked{#/if#}/>Direcci&oacute;n para esta entrega
                     </div>
                     {#/foreach#}
                     <div style="width: 100%; height: 30px; border: 1px solid #000; cursor: pointer; float: left;" onclick="nuevaDireccion();">

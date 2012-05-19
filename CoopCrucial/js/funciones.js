@@ -154,10 +154,7 @@ function cargarCarrito(paso){
         location.href = "productos.php?accion=7&paso="+paso+"&cantidades="+arrayCant+"&ids="+arrayVentas;
     }
     else if(paso==3){
-        if($("#idDireccion").val()=="")
-            alert("Debe seleccionar una direccion.");
-        else
-            location.href = "productos.php?accion=7&paso="+paso+"&idDireccion="+$("#idDireccion").val();
+        location.href = "productos.php?accion=7&paso="+paso+"&idDireccion="+$('[name="direccion"]:checked').val();
     }
     else if(paso==4){
         location.href = "productos.php?accion=9";
@@ -432,4 +429,14 @@ function divsPerfil(div){
             break;
     }
 
+}
+
+function restarCantidad(idProducto){
+    var cant = $("#producto"+idProducto).val();
+    $("#producto"+idProducto).attr("value",cant-1);
+}
+
+function sumarCantidad(idProducto){
+    var cant = parseInt($("#producto"+idProducto).val());
+    $("#producto"+idProducto).attr("value",cant+1);
 }

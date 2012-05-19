@@ -110,6 +110,7 @@ switch ($accion) {
                 break;
         }
         $smarty->assign("paso", $paso);
+        $smarty->assign("carrito", consultarCarrito());
         $smarty->display("carritoInterna.html");
         break;
     case 8:
