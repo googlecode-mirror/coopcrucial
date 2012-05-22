@@ -9,7 +9,6 @@ $dato->autentificarSessionUsuario();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Productos</title>
-
         <!--Estilo-->
         <link type="text/css" rel="stylesheet" href="estilo/admin_css.css" />
         <!--Efecto-->
@@ -19,15 +18,11 @@ $dato->autentificarSessionUsuario();
         <!--Efecto Lstado seccion-->
         <script type="text/javascript" src="js/efectoListadoSeccion.js" ></script>
     </head>
-
     <body>
-
         <!-- top lines for style -->
         <div id="top_green"></div>
         <div id="top_dark"></div>
-
         <div id="wrapper">
-
             <div id="header">
                 <div id="logo"></div>
                 <div id="user_links">
@@ -35,23 +30,15 @@ $dato->autentificarSessionUsuario();
                     <a id="btnLogOut" href="#">Logout</a>
                 </div>
             </div>
-
             <!--Menu Navegacion-->
             <?php include_once('menuNavegacion.php'); ?>
             <!--Fin Menu Navegacion-->
-
             <div id="content">
                 <!-- edit sub navigation and quick links here -->
                 <div id="sub_nav">
-                    <ul>
-
-
-                    </ul>
-
+                    <ul></ul>
                 </div>
-
                 <div id="left">
-
                     <!-- begin all content here -->
                     <h1 class="dashboard">Productos: Listado de productos</h1>
                     <p></p>
@@ -78,29 +65,20 @@ $dato->autentificarSessionUsuario();
                     </div>
                     <div class="div_bottom"></div>
                 </div>
-
                 <!-- Menu navegacion derecho -->
                 <div id="sidebar">
                     <div class="sidebar_header"></div>
                     <div class="sidebar_content">
                         <ul>
                             <li><a href="productosCrear.php">Nuevo Producto </a></li>
-
                         </ul>
                     </div>
-
                 </div>
                 <!-- Fin Menu navegacion derecho -->
-
             </div>
-
             <!--Menu Footer-->
             <?php include_once('footer.php'); ?>
             <!--Fin Menu Footer-->
-
         </div>
-
-
-
     </body>
 </html>

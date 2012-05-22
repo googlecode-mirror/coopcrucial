@@ -56,20 +56,6 @@ $dato->autentificarSessionUsuario();
                     "<textarea name='descripcionEspecificacion[]'  cols='100' rows='10'  class='other' style='width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;'></textarea>"+
                     "</fieldset><br/>");
             }
-            function agregarUso(){
-                if($("#usosSelect").val()=="")
-                    alert("Seleccione una catedoria de uso.");
-                else{
-                    $.ajax({
-                        type: "POST",
-                        url: "clases/funciones.php",
-                        data: "opcion=16&idUso="+$("#usosSelect").val(),
-                        success: function(data){
-                            document.getElementById("divUsos").innerHTML=data;
-                        }
-                    });
-                }
-            }
             function eliminarImagenProducto(p,i){
                 if(confirm("Esta seguro que desea eliminar esta imagen?")){
                     $.ajax({
@@ -156,14 +142,13 @@ $dato->autentificarSessionUsuario();
                             <label>Categoria</label>
                             <select name="idCategoria" style="width: auto;">
                                 <option value="">---</option>
-                                <?php $dato->obtenerListadoCategoriasProducto(); ?>
+                                <?php $dato->obtenerListadoCategoriasProducto($_GET['id']); ?>
                                                      </select>
                                                      <label>Usos</label>
-                                                     <select id="usosSelect" name="idUso[]" style="width: auto;">
+                                                     <select multiple id="usosSelect" name="idUso[]" style="width: auto;">
                                                          <option value="">---</option>
-                                <?php $dato->obtenerListadoUsosProducto(); ?>
-                                                     </select><a href="javascript:void(0);" onclick="agregarUso();">Agregar</a>
-                                                     <div id="divUsos" style="width: 150px; height: 100px; border: 1px solid #000;"></div>
+                                <?php $dato->obtenerListadoUsosProducto($_GET['id']); ?>
+                                                     </select>
                                                      <label onclick="javascript:$('#divImagenes').slideToggle('slow');" style="cursor: pointer;"><strong>IMAGENES</strong> (Deben tener un tamaño de 280 x 200 px)</label>
                                                      <div id="divImagenes" style="display: none;">
                                 <?php $dato->obtenerListadoImagenesProducto($_GET['id']); ?>
@@ -183,15 +168,10 @@ $dato->autentificarSessionUsuario();
                             <input type="hidden" name="opcion" value="9" />
                             <p><input type="submit" class="submit" value="Guardar"/></p>
                         </form>
-
                     </div>
                     <div class="div_bottom"></div>
-
                     <br class="clear"/>
-
-
                 </div>
-
                 <!-- Menu navegacion derecho -->
                 <!--<div id="sidebar">
                         <div class="sidebar_header"></div>
@@ -201,25 +181,14 @@ $dato->autentificarSessionUsuario();
 
                     </ul>
             </div>
-
                     </div>-->
                 <!-- Fin Menu navegacion derecho -->
-
-
-
             </div>
-
             <div id="footer">
                 <!-- edit footer items here -->
                 <div id="copyright">Copyright © 2012 </div>
-                <div id="footer_links">
-
-                </div>
+                <div id="footer_links"></div>
             </div>
-
         </div>
-
-
-
     </body>
 </html>

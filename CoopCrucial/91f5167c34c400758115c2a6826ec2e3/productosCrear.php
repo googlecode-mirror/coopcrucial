@@ -53,20 +53,6 @@ $dato->autentificarSessionUsuario();
                     "<textarea name='descripcionEspecificacion[]'  cols='100' rows='10'  class='other' style='width: 550px; height: 100px; max-width: 550px; max-height: 100px; min-width: 550px; min-height: 100px;'></textarea>"+
                     "</fieldset><br/>");
             }
-            function agregarUso(){
-                if($("#usosSelect").val()=="")
-                    alert("Seleccione una catedoria de uso.");
-                else{
-                    $.ajax({
-                        type: "POST",
-                        url: "clases/funciones.php",
-                        data: "opcion=16&idUso="+$("#usosSelect").val(),
-                        success: function(data){
-                            document.getElementById("divUsos").innerHTML=data;
-                        }
-                    });
-                }
-            }
         </script>
     </head>
     <body>
@@ -118,11 +104,10 @@ $dato->autentificarSessionUsuario();
 <?php $dato->obtenerListadoCategoriasProducto(); ?>
                             </select>
                             <label>Usos</label>
-                            <select id="usosSelect" name="idUso[]" style="width: auto;">
+                            <select multiple id="usosSelect" name="idUso[]" style="width: auto;">
                                 <option value="">---</option>
 <?php $dato->obtenerListadoUsosProducto(); ?>
-                            </select><a href="javascript:void(0);" onclick="agregarUso();">Agregar</a>
-                            <div id="divUsos" style="width: 150px; height: 100px; border: 1px solid #000;"></div>
+                            </select>
                             <label onclick="javascript:$('#divImagenes').slideToggle('slow');" style="cursor: pointer;"><strong>IMAGENES</strong> (Deben tener un tamaño de 280 x 200 px)</label>
                             <div id="divImagenes" style="display: none;">
                                 <label>Imagen 1</label>

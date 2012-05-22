@@ -1,6 +1,8 @@
 <?php
 
 session_start();
+if(!is_array($_SESSION['usuario']))
+    session_unset('usuario');
 require_once '../util/smarty.php';
 require_once '../DAPHP/productoDA.php';
 require_once '../DAPHP/variosDA.php';

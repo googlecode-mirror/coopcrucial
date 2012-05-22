@@ -154,18 +154,6 @@ class CProductos {
         mysql_select_db($this->database_conn, $this->conn);
         $sentencia = "UPDATE `producto` SET  `nombre` =  '$nombre', `descripcion` = '$descripcion', `garantia` = '$garantia', `marca`='$marca', `precio`='$precio', `precioWeb`='$precioWeb', `tags` = '$tags', `destacado`='$destacado', `recomendado`='$recomendado' WHERE  `producto`.`idProducto` = $idProducto;";
         $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
-//        var_dump($this->obtenerImagenesEspecificasProducto($idProducto, "nombre"));
-//        die;
-        /* if ($imagen != "") {
-
-          elimarArchivo("../recursos/categoria/$id/", $this->obtenerEspecificoCategoria($id, "imagen"));
-          $imagen = guardarImagen("../recursos/categoria/$id/", "imagen");
-
-          mysql_select_db($this->database_conn, $this->conn);
-          $sentencia = "UPDATE `categoria` SET  `imagen` =  '$imagen' WHERE  `categoria`.`idCategoria` =$id;";
-
-          $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
-          } */
 
         //Guarda nuevas imagenes
         if (comprobarArchivos("imagenes")) {
@@ -215,8 +203,15 @@ class CProductos {
     }
 
     //Obtener listado categorias de producto
-    public function obtenerListadoCategoriasProducto() {
+    public function obtenerListadoCategoriasProducto($id) {
         $this->conectar();
+        if (isset($id) && $id != "") {
+            mysql_select_db($this->database_conn, $this->conn);
+            $sentencia_cat = "SELECT `idCategoria` FROM `producto` WHERE idProducto = $id";
+            $resultado_cat = mysql_query($sentencia_cat, $this->conn) or die(mysql_error());
+            $idCat = mysql_fetch_assoc($resultado_cat);
+            $idCat = $idCat[idCategoria];
+        }
         mysql_select_db($this->database_conn, $this->conn);
         $sentencia = "SELECT * FROM `categoria` ORDER BY idCategoria ASC";
         $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
@@ -224,14 +219,30 @@ class CProductos {
         $fila = mysql_fetch_assoc($resultado);
         if ($numFilas > 0) {
             do {
-                echo "<option value='" . $fila[idCategoria] . "'>" . $fila[nombre] . "</option>";
+                $selected = "";
+                if ($fila[idCategoria] == $idCat)
+                    $selected = "selected";
+                echo "<option value='" . $fila[idCategoria] . "' $selected>" . $fila[nombre] . "</option>";
             } while ($fila = mysql_fetch_assoc($resultado));
         }
     }
 
     //Obtener listado categorias por usos de producto
-    public function obtenerListadoUsosProducto() {
+    public function obtenerListadoUsosProducto($id) {
         $this->conectar();
+        if (isset($id) && $id != "") {
+            mysql_select_db($this->database_conn, $this->conn);
+            $sentencia_cat = "SELECT `idUso` FROM `uso_producto` WHERE idProducto = $id";
+            $resultado_cat = mysql_query($sentencia_cat, $this->conn) or die(mysql_error());
+            $idsCat = mysql_fetch_assoc($resultado_cat);
+            $filas_cat = mysql_num_rows($resultado_cat);
+            $arrayCat = array();
+            if ($filas_cat > 0) {
+                do {
+                    array_push($arrayCat,$idsCat[idUso]);
+                } while ($idsCat = mysql_fetch_assoc($resultado_cat));
+            }
+        }
         mysql_select_db($this->database_conn, $this->conn);
         $sentencia = "SELECT * FROM `uso` ORDER BY idUso ASC";
         $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
@@ -239,7 +250,10 @@ class CProductos {
         $fila = mysql_fetch_assoc($resultado);
         if ($numFilas > 0) {
             do {
-                echo "<option value='" . $fila[idUso] . "'>" . $fila[nombre] . "</option>";
+                $selected = "";
+                if (is_numeric(array_search($fila[idUso], $arrayCat)))
+                    $selected = "selected";
+                echo "<option value='" . $fila[idUso] . "' $selected>" . $fila[nombre] . "</option>";
             } while ($fila = mysql_fetch_assoc($resultado));
         }
     }
@@ -304,7 +318,7 @@ class CProductos {
         $sentencia = "DELETE FROM `caracteristica` WHERE `idCaracteristica`='$c'";
         $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
     }
-    
+
     //Obtener listado especificaciones de producto
     public function obtenerListadoEspecificacionesProducto($idProducto) {
         $this->conectar();

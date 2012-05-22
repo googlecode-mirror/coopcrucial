@@ -125,15 +125,15 @@ class funciones {
     }
 
     //Obtener listado categorias-productos
-    public function obtenerListadoCategoriasProducto() {
+    public function obtenerListadoCategoriasProducto($id) {
         $objeto = new CProductos();
-        $objeto->obtenerListadoCategoriasProducto();
+        $objeto->obtenerListadoCategoriasProducto($id);
     }
 
     //Obtener listado categorias usos-productos
-    public function obtenerListadoUsosProducto() {
+    public function obtenerListadoUsosProducto($id) {
         $objeto = new CProductos();
-        $objeto->obtenerListadoUsosProducto();
+        $objeto->obtenerListadoUsosProducto($id);
     }
 
     //Obtener listado imagenes-productos
@@ -152,12 +152,6 @@ class funciones {
     public function obtenerListadoEspecificacionesProducto($idProducto) {
         $objeto = new CProductos();
         $objeto->obtenerListadoEspecificacionesProducto($idProducto);
-    }
-
-    //Agregar y retornar los usos de cierto producto
-    public function agregarUso($uso) {
-        $objeto = new CProductos();
-        echo $objeto->agregarUso($uso);
     }
 
     //Elimina la imagen de un producto
@@ -349,7 +343,7 @@ switch ($opcion) {
         $dato->modificarOfertaEspecial();
         break;
     case 16:
-        $dato->agregarUso($_POST['idUso']);
+        //$dato->agregarUso($_POST['idUso']);
         break;
     case 17:
         $dato->eliminarImagenProducto($_POST['p'],$_POST['i']);
