@@ -67,7 +67,9 @@ if (isset($q) && $q != "") {
         </div>";
             }
             else
-                header("Location:../service");
+                echo "<div style='text-align: center; float: left;'>
+                        <h2>No se pudo crear el usuario.</h2>
+                    </div>";
             break;
         case 4://Consulta las ciudades del pais seleccionado
             if (isset($idPais) && $idPais != "") {

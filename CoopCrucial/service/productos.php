@@ -15,7 +15,36 @@ extract($_REQUEST);
 switch ($accion) {
     case 1:
         $smarty->assign("carrito", consultarCarrito());
-        $smarty->assign("producto", consultarProducto($idProducto));
+        $producto = consultarProducto($idProducto);
+        $smarty->assign("producto", $producto);
+        switch ($producto['tipoTalla']) {
+            case 1:
+                $tallas = array("No tiene" => "No tiene");
+                break;
+            case 2:
+                $tallas = array("S" => "S", "M" => "M", "L" => "L", "XL" => "XL");
+                break;
+            case 3:
+                $tallas = array();
+                for ($i = 35; $i < 46; $i++) {
+                    $tallas[$i] = $i;
+                }
+                break;
+            case 4:
+                $tallas = array("Unica" => "Unica");
+                break;
+            default:
+                $tallas = array();
+                break;
+        }
+        $smarty->assign("tallas", $tallas);
+        $colorArray = $producto['colores'];
+        $colorArray = explode(",", $colorArray);
+        $colores = array();
+        for ($i = 0; $i < count($colorArray); $i++) {
+            $colores[$colorArray[$i]] = $colorArray[$i];
+        }
+        $smarty->assign("colores", $colores);
         $smarty->assign("imagenes", consultarImagenesProducto($idProducto));
         $smarty->assign("categoriasInternas", cargarCategoriasInternas($idProducto));
         $smarty->assign("recomendados", consultarProductosRecomendados());
@@ -69,7 +98,16 @@ switch ($accion) {
         $smarty->display("productosListado.html");
         break;
     case 5:
-        $resp = agregarCarrito($id, $cant);
+        /*session_unset();
+        die ("listo");*/
+        if ($talla == "undefined" && $color == "undefined") {
+            $resp = consultarTipoTalla($id);
+            $resp = agregarCarrito($id, $cant, $resp['talla'], $resp['color']);
+        }
+        else
+            $resp = agregarCarrito($id, $cant, $talla, $color);
+        /*var_dump($resp);
+        die;*/
         $smarty->assign("msj", $resp['msj']);
         if ($resp['bool'])
             $smarty->assign("producto", consultarProductoAgregado($resp['idVenta']));

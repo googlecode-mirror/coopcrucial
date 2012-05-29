@@ -13,7 +13,7 @@
         </a>
         <div class="Precio">Precio: {#$r.precio#}</div>
         <div class="PrecioOnline"> Online: {#$r.precioWeb#}</div>
-        <div class="BotonAgregar" onclick="agregarCarrito({#$r.idProducto#},1);">Agregar al carrito</div>
+        <div class="BotonAgregar" onclick="agregarCarrito({#$r.idProducto#},1,1,1);">Agregar al carrito</div>
     </div>
 </div>
 {#/foreach#}

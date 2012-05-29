@@ -157,20 +157,6 @@ function cargarDireccionPorId($idDireccion) {
 
 function guardarDireccion($direccion, $telefono, $predeterminada, $idUsuario, $ciudad) {
     $mdb2 = conectar();
-    if ($predeterminada == 1) {
-        $direcciones = new Direccion($mdb2['dsn']);
-        $direcciones->setSelect('idDireccion');
-        $direcciones->setWhere("predeterminada = 1");
-        $direcciones->setWhere("idUsuario = $idUsuario");
-        $direcciones = $direcciones->getAll();
-        if (count($direcciones) > 0) {
-            foreach ($direcciones as $d) {
-                $dataArray = array("idDireccion" => $d['idDireccion'], "predeterminada" => 0);
-                $dir = new Direccion($mdb2['dsn']);
-                $dir->save($dataArray);
-            }
-        }
-    }
     $nuevaDireccion = new Direccion($mdb2['dsn']);
     $nuevaDireccion->useResult('object');
     $nDireccion = $nuevaDireccion->newEntity();
@@ -180,7 +166,22 @@ function guardarDireccion($direccion, $telefono, $predeterminada, $idUsuario, $c
     $nDireccion->idUsuario = $idUsuario;
     $nDireccion->idCiudad = $ciudad;
     $idDireccion = $nDireccion->save();
-    return is_numeric($idDireccion);
+    if ($predeterminada == 1 && is_numeric($idDireccion)) {
+        $direcciones = new Direccion($mdb2['dsn']);
+        $direcciones->setSelect('idDireccion');
+        $direcciones->setWhere("predeterminada = 1");
+        $direcciones->addWhere("idUsuario = $idUsuario");
+        $direcciones = $direcciones->getAll();
+        if (count($direcciones) > 0) {
+            foreach ($direcciones as $d) {
+                $dataArray = array("idDireccion" => $d['idDireccion'], "predeterminada" => 0);
+                $dir = new Direccion($mdb2['dsn']);
+                $dir->save($dataArray);
+            }
+        }
+        return true;
+    }
+    return false;
 }
 
 function editarDireccionCompleta($idDireccion, $direccion, $telefono, $idUsuario, $ciudad) {

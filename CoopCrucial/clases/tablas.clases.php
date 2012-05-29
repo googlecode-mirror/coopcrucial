@@ -27,8 +27,6 @@ define('TABLA_PRODUCTO', 'producto');
 define('TABLA_ESPECIFICACION', 'especificacion');
 define('TABLA_CARACTERISTICA', 'caracteristica');
 define('TABLA_IMAGEN_PRODUCTO', 'imagen_producto');
-define('TABLA_COLOR_PRODUCTO', 'color_producto');
-define('TABLA_COLOR', 'color');
 define('TABLA_IMAGEN_HOME','imagen_home');
 define('TABLA_IMAGEN_OFERTA_ESPECIAL','oferta_especial');
 define('TABLA_IMAGEN_DESTACADO','imagen_destacado');
@@ -76,16 +74,6 @@ class Caracteristica extends MDB_QueryToolExt {
 class ImagenProducto extends MDB_QueryToolExt {
     var $table = TABLA_IMAGEN_PRODUCTO;
     var $primaryCol = 'idImagenProducto';
-}
-
-class ColorProducto extends MDB_QueryToolExt {
-    var $table = TABLA_COLOR_PRODUCTO;
-    var $primaryCol = 'idColorProducto';
-}
-
-class Color extends MDB_QueryToolExt {
-    var $table = TABLA_COLOR;
-    var $primaryCol = 'idColor';
 }
 
 class ImagenHome extends MDB_QueryToolExt {

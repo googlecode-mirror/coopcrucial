@@ -58,6 +58,8 @@ class CProductos {
         $descripcion = htmlspecialchars($_POST['descripcion'], ENT_QUOTES);
         $garantia = htmlspecialchars($_POST['garantia'], ENT_QUOTES);
         $marca = htmlspecialchars($_POST['marca'], ENT_QUOTES);
+        $tipoTalla = htmlspecialchars($_POST['tipoTalla'], ENT_QUOTES);
+        $colores = htmlspecialchars($_POST['colores'], ENT_QUOTES);
         $precio = (int) $_POST['precio'];
         $precioWeb = (int) $_POST['precioWeb'];
         $tags = htmlspecialchars($_POST['tags']);
@@ -74,7 +76,7 @@ class CProductos {
         $id = $this->obtenerConsecutivoProducto();
         $this->conectar();
         mysql_select_db($this->database_conn, $this->conn);
-        $sentencia = "INSERT INTO `producto` (`idProducto`, `nombre`, `descripcion`, `garantia`, `marca`, `precio`, `precioWeb`, `vecesComprado`, `tags`, `destacado`, `recomendado`, `numeroVotos`, `calificacion`, `idCategoria`) VALUES ('$id', '$nombre', '$descripcion', '$garantia', '$marca', '$precio', '$precioWeb', '0', '$tags', '$destacado', '$recomendado', '0', '1', '$idCategoria');";
+        $sentencia = "INSERT INTO `producto` (`idProducto`, `nombre`, `descripcion`, `garantia`, `marca`, `tipoTalla`, `colores`, `precio`, `precioWeb`, `vecesComprado`, `tags`, `destacado`, `recomendado`, `numeroVotos`, `calificacion`, `idCategoria`) VALUES ('$id', '$nombre', '$descripcion', '$garantia', '$marca', '$tipoTalla', '$colores', '$precio', '$precioWeb', '0', '$tags', '$destacado', '$recomendado', '0', '1', '$idCategoria');";
         $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
 
         //Usos
@@ -136,6 +138,8 @@ class CProductos {
         $descripcion = htmlspecialchars($_POST['descripcion'], ENT_QUOTES);
         $garantia = htmlspecialchars($_POST['garantia'], ENT_QUOTES);
         $marca = htmlspecialchars($_POST['marca'], ENT_QUOTES);
+        $tipoTalla = htmlspecialchars($_POST['tipoTalla'], ENT_QUOTES);
+        $colores = htmlspecialchars($_POST['colores'], ENT_QUOTES);
         $precio = (int) $_POST['precio'];
         $precioWeb = (int) $_POST['precioWeb'];
         $tags = htmlspecialchars($_POST['tags']);
@@ -152,7 +156,7 @@ class CProductos {
 
         $this->conectar();
         mysql_select_db($this->database_conn, $this->conn);
-        $sentencia = "UPDATE `producto` SET  `nombre` =  '$nombre', `descripcion` = '$descripcion', `garantia` = '$garantia', `marca`='$marca', `precio`='$precio', `precioWeb`='$precioWeb', `tags` = '$tags', `destacado`='$destacado', `recomendado`='$recomendado' WHERE  `producto`.`idProducto` = $idProducto;";
+        $sentencia = "UPDATE `producto` SET  `nombre` =  '$nombre', `descripcion` = '$descripcion', `garantia` = '$garantia', `marca`='$marca', `tipoTalla`='$tipoTalla', `colores`='$colores', `precio`='$precio', `precioWeb`='$precioWeb', `tags` = '$tags', `destacado`='$destacado', `recomendado`='$recomendado' WHERE  `producto`.`idProducto` = $idProducto;";
         $resultado = mysql_query($sentencia, $this->conn) or die(mysql_error());
 
         //Guarda nuevas imagenes

@@ -129,6 +129,12 @@ $dato->autentificarSessionUsuario();
                             <input type="text" name="garantia" class="other" maxlength="20" value="<?php echo $dato->obtenerEspecificoProducto($_GET['id'], "garantia"); ?>"  />
                             <label>Marca</label>
                             <input type="text" name="marca" class="other" maxlength="30" value="<?php echo $dato->obtenerEspecificoProducto($_GET['id'], "marca"); ?>" />
+                            <label>Tipo de talla</label>
+                            <select id="tipoTalla" name="tipoTalla" style="width: auto;">
+<?php $dato->obtenerListadoTipoTallas($_GET['id']); ?>
+                            </select>
+                            <label>Colores (Separados por coma (,))</label>
+                            <input type="text" name="colores" class="other" maxlength="100" value="<?php echo $dato->obtenerEspecificoProducto($_GET['id'], "colores") ?>" />
                             <label>Precio</label>
                             <input type="text" name="precio" class="other" maxlength="15" value="<?php echo $dato->obtenerEspecificoProducto($_GET['id'], "precio"); ?>" />
                             <label>Precio Web</label>

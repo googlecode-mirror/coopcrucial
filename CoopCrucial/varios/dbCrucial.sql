@@ -33,6 +33,8 @@ CREATE  TABLE IF NOT EXISTS `coopcrucial`.`producto` (
   `descripcion` TEXT NOT NULL ,
   `garantia` VARCHAR(45) NOT NULL ,
   `marca` VARCHAR(45) NOT NULL ,
+  `tipoTalla` INT NOT NULL ,
+  `colores` VARCHAR(100) NOT NULL ,
   `precio` FLOAT NOT NULL ,
   `precioWeb` FLOAT NOT NULL ,
   `vecesComprado` INT NOT NULL DEFAULT 0 ,
@@ -150,44 +152,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `coopcrucial`.`color`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `coopcrucial`.`color` ;
-
-CREATE  TABLE IF NOT EXISTS `coopcrucial`.`color` (
-  `idColor` INT NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(45) NOT NULL ,
-  `codigo` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idColor`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `coopcrucial`.`color_producto`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `coopcrucial`.`color_producto` ;
-
-CREATE  TABLE IF NOT EXISTS `coopcrucial`.`color_producto` (
-  `idColorProducto` INT NOT NULL AUTO_INCREMENT ,
-  `idProducto` INT NOT NULL ,
-  `idColor` INT NOT NULL ,
-  PRIMARY KEY (`idColorProducto`) ,
-  INDEX `fk_producto_has_color_color1` (`idColor` ASC) ,
-  INDEX `fk_producto_has_color_producto1` (`idProducto` ASC) ,
-  CONSTRAINT `fk_producto_has_color_producto1`
-    FOREIGN KEY (`idProducto` )
-    REFERENCES `coopcrucial`.`producto` (`idProducto` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_producto_has_color_color1`
-    FOREIGN KEY (`idColor` )
-    REFERENCES `coopcrucial`.`color` (`idColor` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `coopcrucial`.`imagen_home`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `coopcrucial`.`imagen_home` ;
@@ -274,6 +238,8 @@ CREATE  TABLE IF NOT EXISTS `coopcrucial`.`venta` (
   `carrito` TINYINT(1) NOT NULL DEFAULT true ,
   `idDireccion` INT NULL ,
   `fecha` DATETIME NULL ,
+  `talla` VARCHAR(45) NOT NULL ,
+  `color` VARCHAR(45) NOT NULL ,
   INDEX `fk_producto_has_usuario_usuario1` (`idUsuario` ASC) ,
   INDEX `fk_producto_has_usuario_producto1` (`idProducto` ASC) ,
   PRIMARY KEY (`idVenta`) ,

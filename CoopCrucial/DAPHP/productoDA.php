@@ -177,28 +177,46 @@ function calificacionesProductos() {
     return $calificaciones;
 }
 
-function agregarCarrito($idProducto, $cantidad) {
-    if (!isset($_SESSION['usuario']['idUsuario']) || $_SESSION['usuario']['idUsuario'] == "")
-        return array("bool" => false, "msj" => "No tiene sesion iniciada.");
-    $mdb2 = conectar();
-    $carrito = new Venta($mdb2['dsn']);
-    $carrito->setSelect("idVenta");
-    $carrito->setWhere("idUsuario = " . $_SESSION['usuario']['idUsuario']);
-    $carrito->addWhere("idProducto = $idProducto");
-    $carrito->addWhere("carrito = 1");
-    $carrito = $carrito->getAll();
-    if (count($carrito) > 0)
-        return array("bool" => true, "msj" => "Este producto ya se encuentra en el carrito.", "idVenta" => $carrito[0]['idVenta']);
-    $nuevaVenta = new Venta($mdb2['dsn']);
-    $nuevaVenta->useResult('object');
-    $nVenta = $nuevaVenta->newEntity();
-    $nVenta->idProducto = $idProducto;
-    $nVenta->idUsuario = $_SESSION['usuario']['idUsuario'];
-    $nVenta->cantidad = $cantidad;
-    $nVenta->carrito = 1;
-    $nVenta->idDireccion = null;
-    $idVenta = $nVenta->save();
-    if (is_numeric($idVenta)) {
+function agregarCarrito($idProducto, $cantidad, $talla, $color) {
+    if (!isset($_SESSION['usuario']['idUsuario']) || $_SESSION['usuario']['idUsuario'] == "") {
+        $nombreUsuario = "COOP-" . strRandom(5);
+        $_SESSION['usuario']['nombreUsuario'] = $nombreUsuario;
+        $_SESSION['usuario']['nombre'] = "";
+        $_SESSION['usuario']['idUsuario'] = $nombreUsuario;
+    }
+    if (is_numeric($_SESSION['usuario']['idUsuario'])) {//BD
+        $mdb2 = conectar();
+        $carrito = new Venta($mdb2['dsn']);
+        $carrito->setSelect("idVenta");
+        $carrito->setWhere("idUsuario = " . $_SESSION['usuario']['idUsuario']);
+        $carrito->addWhere("idProducto = $idProducto");
+        $carrito->addWhere("carrito = 1");
+        $carrito = $carrito->getAll();
+        if (count($carrito) > 0)
+            return array("bool" => true, "msj" => "Este producto ya se encuentra en el carrito.", "idVenta" => $carrito[0]['idVenta']);
+        $nuevaVenta = new Venta($mdb2['dsn']);
+        $nuevaVenta->useResult('object');
+        $nVenta = $nuevaVenta->newEntity();
+        $nVenta->idProducto = $idProducto;
+        $nVenta->idUsuario = $_SESSION['usuario']['idUsuario'];
+        $nVenta->cantidad = $cantidad;
+        $nVenta->carrito = 1;
+        $nVenta->talla = $talla;
+        $nVenta->color = $color;
+        $nVenta->idDireccion = null;
+        $idVenta = $nVenta->save();
+        if (is_numeric($idVenta)) {
+            return array("bool" => true, "msj" => "El producto se ha agregado al carrito.", "idVenta" => $idVenta);
+        }
+        return array("bool" => false, "msj" => "No se pudo agregar al carrito.");
+    } elseif (substr_compare($_SESSION['usuario']['idUsuario'], "COOP-", 0, 5) == 0) {//Session
+        for ($i = 0; $i < count($_SESSION['carrito']); $i++) {
+            if ($_SESSION['carrito'][$i]['idProducto'] == $idProducto)
+                return array("bool" => true, "msj" => "Este producto ya se encuentra en el carrito.", "idVenta" => $_SESSION['carrito'][$i]['idVenta']);
+        }
+        $idVenta = strRandom(6);
+        $_SESSION['carrito'] = array();
+        array_push($_SESSION['carrito'], array('idVenta' => $idVenta, 'idUsuario' => $_SESSION['usuario']['idUsuario'], 'idProducto' => $idProducto, 'cantidad' => $cantidad, 'talla' => $talla, 'color' => $color));
         return array("bool" => true, "msj" => "El producto se ha agregado al carrito.", "idVenta" => $idVenta);
     }
     return array("bool" => false, "msj" => "No se pudo agregar al carrito.");
@@ -207,39 +225,79 @@ function agregarCarrito($idProducto, $cantidad) {
 function consultarCarrito() {
     if (!isset($_SESSION['usuario']['idUsuario']) || $_SESSION['usuario']['idUsuario'] == "")
         return 0;
-    $mdb2 = conectar();
-    $carrito = new Venta($mdb2['dsn']);
-    $carrito->setSelect(TABLA_PRODUCTO . ".nombre AS nombre");
-    $carrito->addSelect(TABLA_PRODUCTO . ".precioWeb AS precio");
-    $carrito->setWhere("idUsuario = " . $_SESSION['usuario']['idUsuario']);
-    $carrito->addWhere("carrito = 1");
-    $carrito->setJoin(TABLA_PRODUCTO, TABLA_VENTA . ".idProducto = " . TABLA_PRODUCTO . ".idProducto", inner);
-    $cantidadCarrito = $carrito->getCount();
-    $productosCarrito = $carrito->getAll();
-    $total = 0;
-    foreach ($productosCarrito as $p) {
-        $total += $p['precio'];
+    if (substr_compare($_SESSION['usuario']['idUsuario'], "COOP-", 0, 5) < 0) {//BD
+        $mdb2 = conectar();
+        $carrito = new Venta($mdb2['dsn']);
+        $carrito->setSelect(TABLA_PRODUCTO . ".nombre AS nombre");
+        $carrito->addSelect(TABLA_PRODUCTO . ".precioWeb AS precio");
+        $carrito->setWhere("idUsuario = " . $_SESSION['usuario']['idUsuario']);
+        $carrito->addWhere("carrito = 1");
+        $carrito->setJoin(TABLA_PRODUCTO, TABLA_VENTA . ".idProducto = " . TABLA_PRODUCTO . ".idProducto", inner);
+        $cantidadCarrito = $carrito->getCount();
+        $productosCarrito = $carrito->getAll();
+        $total = 0;
+        foreach ($productosCarrito as $p) {
+            $total += $p['precio'];
+        }
+        return array("cantidad" => $cantidadCarrito, "productos" => $productosCarrito, "total" => $total);
+    } else {//Session
+        $productosCarrito = array();
+        $total = 0;
+        for ($i = 0; $i < count($_SESSION['carrito']); $i++) {
+            $producto = new Producto($mdb2['dsn']);
+            $producto->setSelect("nombre");
+            $producto->addSelect("precioWeb AS precio");
+            $producto = $producto->get($_SESSION['carrito'][$i]['idProducto']);
+            array_push($productosCarrito, $producto);
+            $total += $producto['precio'];
+        }
+        return array("cantidad" => count($_SESSION['carrito']), "productos" => $productosCarrito, "total" => $total);
     }
-    return array("cantidad" => $cantidadCarrito, "productos" => $productosCarrito, "total" => $total);
 }
 
 function consultarProductoAgregado($idVenta) {
     $mdb2 = conectar();
-    $producto = new Venta($mdb2['dsn']);
-    $producto->setSelect("idVenta");
-    $producto->addSelect("cantidad");
-    $producto->addSelect(TABLA_PRODUCTO . ".idProducto AS idProducto");
-    $producto->addSelect(TABLA_PRODUCTO . ".nombre AS nombre");
-    $producto->addSelect(TABLA_PRODUCTO . ".precioWeb AS precioWeb");
-    $producto->addSelect(TABLA_IMAGEN_PRODUCTO . ".nombre AS imagen");
-    $producto->addSelect(TABLA_IMAGEN_PRODUCTO . ".idImagenProducto AS idImagen");
-    $producto->setWhere("carrito = 1");
-    $producto->setJoin(TABLA_PRODUCTO, "venta.idProducto = " . TABLA_PRODUCTO . ".idProducto", inner);
-    $producto->addJoin(TABLA_IMAGEN_PRODUCTO, TABLA_PRODUCTO . ".idProducto = " . TABLA_IMAGEN_PRODUCTO . ".idProducto", inner);
-    $producto->setGroup("idVenta");
-    $producto = $producto->get($idVenta);
-    $producto['precioWeb'] = $producto['precioWeb'] * $producto['cantidad'];
-    return $producto;
+    //if (substr_compare($idVenta, "COOP-", 0, 5) < 0) {
+    if (is_numeric($idVenta)) {
+        $producto = new Venta($mdb2['dsn']);
+        $producto->setSelect("idVenta");
+        $producto->addSelect("cantidad");
+        $producto->addSelect("talla");
+        $producto->addSelect("color");
+        $producto->addSelect(TABLA_PRODUCTO . ".idProducto AS idProducto");
+        $producto->addSelect(TABLA_PRODUCTO . ".nombre AS nombre");
+        $producto->addSelect(TABLA_PRODUCTO . ".precioWeb AS precioWeb");
+        $producto->addSelect(TABLA_IMAGEN_PRODUCTO . ".nombre AS imagen");
+        $producto->addSelect(TABLA_IMAGEN_PRODUCTO . ".idImagenProducto AS idImagen");
+        $producto->setWhere("carrito = 1");
+        $producto->setJoin(TABLA_PRODUCTO, "venta.idProducto = " . TABLA_PRODUCTO . ".idProducto", inner);
+        $producto->addJoin(TABLA_IMAGEN_PRODUCTO, TABLA_PRODUCTO . ".idProducto = " . TABLA_IMAGEN_PRODUCTO . ".idProducto", inner);
+        $producto->setGroup("idVenta");
+        $producto = $producto->get($idVenta);
+        $producto['precioWeb'] = $producto['precioWeb'] * $producto['cantidad'];
+        return $producto;
+    } else {
+        for ($i = 0; $i < count($_SESSION['carrito']); $i++) {
+            if ($_SESSION['carrito'][$i]['idVenta'] == $idVenta) {
+                $producto = new Producto($mdb2['dsn']);
+                $producto->setSelect("idProducto");
+                $producto->addSelect("nombre");
+                $producto->addSelect("precioWeb");
+                $producto->addSelect(TABLA_IMAGEN_PRODUCTO . ".nombre AS imagen");
+                $producto->addSelect(TABLA_IMAGEN_PRODUCTO . ".idImagenProducto AS idImagen");
+                $producto->setWhere("idProducto = " . $_SESSION['carrito'][$i]['idProducto']);
+                $producto->setJoin(TABLA_IMAGEN_PRODUCTO, TABLA_PRODUCTO . ".idProducto = " . TABLA_IMAGEN_PRODUCTO . ".idProducto", inner);
+                $producto = $producto->getAll();
+                $producto = $producto[0];
+                $producto['idVenta'] = $_SESSION['carrito'][$i]['idVenta'];
+                $producto['talla'] = $_SESSION['carrito'][$i]['talla'];
+                $producto['color'] = $_SESSION['carrito'][$i]['color'];
+                $producto['cantidad'] = $_SESSION['carrito'][$i]['cantidad'];
+                $producto['precioWeb'] = $producto['precioWeb'] * $_SESSION['carrito'][$i]['cantidad'];
+                return $producto;
+            }
+        }
+    }
 }
 
 function consultarEspecificaciones($idProducto) {
@@ -288,19 +346,29 @@ function cargarProductosCarrito() {
 }
 
 function eliminarRegistro($idProducto) {
-    $mdb2 = conectar();
-    $carrito = new Venta($mdb2['dsn']);
-    $carrito->setSelect("idVenta");
-    $carrito->setWhere("idUsuario = " . $_SESSION['usuario']['idUsuario']);
-    $carrito->addWhere("idProducto = $idProducto");
-    $carrito->addWhere("carrito = 1");
-    $carrito = $carrito->getAll();
-    if (sizeof($carrito) > 0) {
-        $idVenta = $carrito[0]['idVenta'];
+    if (substr_compare($_SESSION['usuario']['idUsuario'], "COOP-", 0, 5) < 0) {//BD
+        $mdb2 = conectar();
         $carrito = new Venta($mdb2['dsn']);
-        return $carrito->remove($idVenta, "idVenta");
+        $carrito->setSelect("idVenta");
+        $carrito->setWhere("idUsuario = " . $_SESSION['usuario']['idUsuario']);
+        $carrito->addWhere("idProducto = $idProducto");
+        $carrito->addWhere("carrito = 1");
+        $carrito = $carrito->getAll();
+        if (sizeof($carrito) > 0) {
+            $idVenta = $carrito[0]['idVenta'];
+            $carrito = new Venta($mdb2['dsn']);
+            return $carrito->remove($idVenta, "idVenta");
+        }
+        return false;
+    } else {//Session
+        for ($i = 0; $i < count($_SESSION['carrito']); $i++) {
+            if($_SESSION['carrito'][$i]['idProducto'] == $idProducto){
+                session_unset($_SESSION['carrito'][$i]);
+                return true;
+            }
+        }
+        return false;
     }
-    return false;
 }
 
 function cantidadesCarrito($ventas, $cantidades) {
@@ -327,7 +395,7 @@ function compraCarrito() {
     $ventas->setJoin(TABLA_PRODUCTO, "venta.idProducto = " . TABLA_PRODUCTO . ".idProducto", inner);
     $ventas = $ventas->getAll();
     for ($i = 0; $i < sizeof($ventas); $i++) {
-        $arrayData = array("idProducto" => $ventas[$i]["idProducto"], "vecesComprado"=>($ventas[$i]["vecesComprado"]+1));
+        $arrayData = array("idProducto" => $ventas[$i]["idProducto"], "vecesComprado" => ($ventas[$i]["vecesComprado"] + 1));
         $producto = new Producto($mdb2['dsn']);
         $producto->save($arrayData);
         $arrayData = array("idVenta" => $ventas[$i]['idVenta'], "carrito" => 0, "fecha" => date("Y-m-d H:i:s"));
@@ -350,6 +418,26 @@ function productos($cat, $id) {
     $productos->setLimit(0, 6);
     $productos->setGroup(TABLA_PRODUCTO . ".idProducto");
     return $productos->getAll();
+}
+
+function consultarTipoTalla($idProducto) {
+    $mdb2 = conectar();
+    $producto = new Producto($mdb2['dsn']);
+    $producto->setSelect("tipoTalla");
+    $producto->addSelect("colores");
+    $producto = $producto->get($idProducto);
+    if ($producto['tipoTalla'] == 1)
+        $talla = "No tiene";
+    elseif ($producto['tipoTalla'] == 2)
+        $talla = "S";
+    elseif ($producto['tipoTalla'] == 3)
+        $talla = 35;
+    elseif ($producto['tipoTalla'] == 4)
+        $talla = "Unica";
+    else
+        $talla = "No tiene";
+    $colores = explode(",", $producto['colores']);
+    return array("talla" => $talla, "color" => $colores[0]);
 }
 
 ?>

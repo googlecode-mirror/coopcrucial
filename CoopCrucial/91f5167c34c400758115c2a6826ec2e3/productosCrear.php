@@ -90,6 +90,12 @@ $dato->autentificarSessionUsuario();
                             <input type="text" name="garantia" class="other" maxlength="20"  />
                             <label>Marca</label>
                             <input type="text" name="marca" class="other" maxlength="30"  />
+                            <label>Tipo de talla</label>
+                            <select id="tipoTalla" name="tipoTalla" style="width: auto;">
+<?php $dato->obtenerListadoTipoTallas(); ?>
+                            </select>
+                            <label>Colores (Separados por coma (,))</label>
+                            <input type="text" name="colores" class="other" maxlength="100"  />
                             <label>Precio</label>
                             <input type="text" name="precio" class="other" maxlength="15"  />
                             <label>Precio Web</label>

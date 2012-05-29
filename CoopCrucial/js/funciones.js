@@ -129,7 +129,12 @@ function agregarCarritoCantidad(idProducto){
 }
 
 function agregarCarrito(idProducto, cantidad){
-    location.href = "productos.php?accion=5&id="+idProducto+"&cant="+cantidad
+    if($("#talla").val()=="")
+        alert("Seleccione una talla");
+    else if($("#color").val()=="")
+        alert("Seleccione un color");
+    else
+        location.href = "productos.php?accion=5&id="+idProducto+"&cant="+cantidad+"&talla="+$("#talla").val()+"&color="+$("#color").val()
 }
 
 function cargarCarrito(paso){

@@ -124,6 +124,19 @@ class funciones {
         return $objeto->obtenerEspecificoProducto($id, $campo);
     }
 
+    //Obtener tipo de Tallas
+    public function obtenerListadoTipoTallas($idTalla) {
+        $tiposTallas = array(1=>"No tiene",2=>"Letras",3=>"Numeros",4=>"Unica");
+        $select = "";
+        $selected = "";
+        for ($i = 1; $i <= count($tiposTallas); $i++) {
+            if($idTalla == $i)
+                $selected = "selected";
+            $select .= "<option value='$i' $selected>" . $tiposTallas[$i] . "</option>";
+        }
+        echo $select;
+    }
+
     //Obtener listado categorias-productos
     public function obtenerListadoCategoriasProducto($id) {
         $objeto = new CProductos();

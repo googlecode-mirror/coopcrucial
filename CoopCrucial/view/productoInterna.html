@@ -80,18 +80,13 @@
                         <option value="9">9</option>
                         <option value="10">10</option>
                     </select>
-                    <select name="talla">
+                    <select id="talla" name="talla">
                         <option value="">Talla</option>
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
+                        {#html_options options=$tallas#}
                     </select>
-                    <select name="color">
+                    <select id="color" name="color">
                         <option value="">Color</option>
-                        <option value="1" style="background-color: #00c; color: #fff;">Azul</option>
-                        <option value="1" style="background-color: #c00; color: #fff;">Rojo</option>
+                        {#html_options options=$colores#}
                     </select>
                     <hr>
                     <div style="float: left; width: 40%; margin-right: 3%;">
@@ -186,7 +181,10 @@
                 </div>
             </div>
             <div class="grid_12" style="height: 20px;"></div>
-            {#include file="recomendados.tpl"#}
+            <div id="ContenedorRecomendadosHome" class="grid_12" style="">
+                {#include file="recomendados.tpl"#}
+            </div>
+            <div class="grid_12" style="height: 20px;"></div>
             {#include file="footer.tpl"#}
         </div>
         <script type="text/javascript" language="javascript">
